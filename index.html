@@ -8,9 +8,12 @@
 <title>BrightPath Academy | Maths & Science Tuition Classes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="preconnect" href="https://images.unsplash.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
@@ -18,10 +21,24 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { 
-  scroll-behavior: smooth; 
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
   font-size: 16px;
   scrollbar-width: thin;
   scrollbar-color: #6366F1 #14132B;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 ::-webkit-scrollbar { width: 6px; }
@@ -86,6 +103,7 @@ html {
   --font-serif: 'DM Serif Display', serif;
   --font-sans: 'Inter', -apple-system, sans-serif;
   --font-display: 'Space Grotesk', sans-serif;
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 body {
@@ -97,7 +115,7 @@ body {
     radial-gradient(ellipse 70% 50% at 80% 70%, rgba(167,139,250,0.20), transparent 55%),
     linear-gradient(135deg, #F4F1FF 0%, #FDF2F8 35%, #F0F9FF 70%, #FAF5FF 100%);
   background-size: 160% 160%, 150% 150%, 170% 170%, 140% 140%, 100% 100%;
-  background-attachment: fixed;
+  background-attachment: scroll;
   animation: bodyGradientShift 22s ease-in-out infinite alternate;
   color: var(--text-primary);
   line-height: 1.6;
@@ -289,27 +307,26 @@ nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 1000;
-  padding: 0 clamp(20px, 4vw, 48px);
-  height: 72px;
+  padding: 14px clamp(16px, 4vw, 48px);
+  min-height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.45s var(--ease-smooth);
+  will-change: min-height, padding;
 }
 
 nav::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(250,250,249,0.85);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border-bottom: 1px solid var(--border);
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(247,245,255,0.74), rgba(247,245,255,0));
+  opacity: 0.88;
+  transition: opacity 0.45s var(--ease-smooth);
 }
 
-nav.scrolled { height: 64px; }
+nav.scrolled { min-height: 68px; padding-top: 8px; padding-bottom: 8px; }
 nav.scrolled::before { opacity: 1; }
 
 .nav-shell {
@@ -320,6 +337,44 @@ nav.scrolled::before { opacity: 1; }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 18px;
+  min-height: 52px;
+  padding: 10px 14px 10px 16px;
+  border: 1px solid rgba(255,255,255,0.52);
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.74), rgba(255,255,255,0.38)),
+    rgba(247,245,255,0.58);
+  backdrop-filter: blur(24px) saturate(175%);
+  -webkit-backdrop-filter: blur(24px) saturate(175%);
+  box-shadow:
+    0 18px 48px rgba(20,19,43,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.72),
+    inset 0 -1px 0 rgba(255,255,255,0.22);
+  transform: translateZ(0);
+  transition: background 0.45s var(--ease-smooth), box-shadow 0.45s var(--ease-smooth), min-height 0.45s var(--ease-smooth);
+  will-change: min-height, box-shadow, background;
+}
+
+.nav-shell::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(90deg, rgba(255,255,255,0.6), transparent 28%, rgba(99,102,241,0.10) 62%, rgba(251,113,133,0.12));
+  opacity: 0.72;
+}
+
+nav.scrolled .nav-shell {
+  min-height: 48px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.84), rgba(255,255,255,0.48)),
+    rgba(247,245,255,0.72);
+  box-shadow:
+    0 14px 38px rgba(20,19,43,0.14),
+    inset 0 1px 0 rgba(255,255,255,0.78),
+    inset 0 -1px 0 rgba(255,255,255,0.24);
 }
 
 .nav-logo {
@@ -332,20 +387,23 @@ nav.scrolled::before { opacity: 1; }
   gap: 10px;
   text-decoration: none;
   letter-spacing: -0.02em;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
 }
 
 .nav-logo-icon {
   width: 32px;
   height: 32px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #F59E0B, #D97706);
+  background: linear-gradient(135deg, var(--brand), var(--accent));
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.85rem;
   color: white;
   font-weight: 800;
-  box-shadow: 0 2px 8px rgba(245,158,11,0.3);
+  box-shadow: 0 8px 22px rgba(99,102,241,0.24);
 }
 
 .nav-links {
@@ -353,6 +411,9 @@ nav.scrolled::before { opacity: 1; }
   align-items: center;
   gap: 8px;
   list-style: none;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .nav-links a {
@@ -362,13 +423,15 @@ nav.scrolled::before { opacity: 1; }
   text-decoration: none;
   padding: 8px 14px;
   border-radius: var(--radius-full);
-  transition: all 0.3s ease;
+  transition: color 0.35s var(--ease-smooth), background 0.35s var(--ease-smooth), box-shadow 0.35s var(--ease-smooth), transform 0.35s var(--ease-smooth);
   letter-spacing: -0.01em;
+  white-space: nowrap;
 }
 
 .nav-links a:hover {
   color: var(--text-primary);
-  background: rgba(0,0,0,0.04);
+  background: rgba(255,255,255,0.48);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.44);
 }
 
 .nav-cta {
@@ -377,23 +440,28 @@ nav.scrolled::before { opacity: 1; }
   padding: 10px 22px !important;
   font-weight: 600 !important;
   box-shadow: var(--shadow-sm);
-  transition: all 0.3s ease !important;
+  transition: color 0.35s var(--ease-smooth), background 0.35s var(--ease-smooth), box-shadow 0.35s var(--ease-smooth), transform 0.35s var(--ease-smooth) !important;
+  border: 1px solid rgba(255,255,255,0.20);
 }
 
 .nav-cta:hover {
-  background: var(--amber) !important;
-  color: var(--bg-dark) !important;
+  background: linear-gradient(135deg, var(--brand), var(--accent)) !important;
+  color: white !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(245,158,11,0.3) !important;
+  box-shadow: 0 10px 26px rgba(99,102,241,0.26) !important;
 }
 
 .nav-menu-btn {
   display: none;
   width: 36px; height: 36px;
   border: none;
-  background: transparent;
+  background: rgba(255,255,255,0.38);
+  border-radius: 999px;
   cursor: pointer;
   position: relative;
+  z-index: 1;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.42);
+  transition: background 0.35s var(--ease-smooth), box-shadow 0.35s var(--ease-smooth), transform 0.35s var(--ease-smooth);
 }
 
 .nav-menu-btn span {
@@ -1000,6 +1068,8 @@ nav.menu-open .nav-menu-btn span:nth-child(3) { top: 17px; transform: rotate(-45
   padding: 120px clamp(20px, 4vw, 48px);
   position: relative;
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
 }
 
 .section::before {
@@ -2335,21 +2405,41 @@ nav.menu-open .nav-menu-btn span:nth-child(3) { top: 17px; transform: rotate(-45
 
 /* ============= FOOTER ============= */
 footer {
-  background: var(--bg-dark);
-  padding: 80px clamp(20px, 4vw, 48px) 40px;
+  background:
+    radial-gradient(circle at 14% 0%, rgba(99,102,241,0.28), transparent 28%),
+    radial-gradient(circle at 86% 20%, rgba(251,113,133,0.18), transparent 30%),
+    linear-gradient(135deg, #14132B 0%, #1E1B3A 54%, #0F1028 100%);
+  padding: 76px clamp(20px, 4vw, 48px) 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.75), transparent 82%);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.75), transparent 82%);
 }
 
 .footer-inner {
   max-width: 1280px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: minmax(260px, 1.5fr) repeat(3, minmax(150px, 1fr));
+  gap: clamp(28px, 4vw, 56px);
   padding-bottom: 48px;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid rgba(255,255,255,0.10);
 }
 
 .footer-brand-name {
@@ -2367,7 +2457,7 @@ footer {
   width: 28px;
   height: 28px;
   border-radius: 8px;
-  background: linear-gradient(135deg, #F59E0B, #D97706);
+  background: linear-gradient(135deg, var(--brand), var(--accent));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2377,8 +2467,9 @@ footer {
 }
 
 .footer-brand p {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.35);
+  max-width: 360px;
+  font-size: 0.86rem;
+  color: rgba(255,255,255,0.54);
   line-height: 1.7;
 }
 
@@ -2387,7 +2478,7 @@ footer {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.42);
   margin-bottom: 20px;
 }
 
@@ -2397,13 +2488,13 @@ footer {
 
 .footer-col ul a {
   font-size: 0.85rem;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.62);
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .footer-col ul a:hover {
-  color: var(--amber);
+  color: #A5B4FC;
   padding-left: 4px;
 }
 
@@ -2418,7 +2509,7 @@ footer {
 
 .footer-bottom p {
   font-size: 0.75rem;
-  color: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.34);
 }
 
 /* ============= FLOATING SHAPES ============= */
@@ -2475,8 +2566,32 @@ footer {
   background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(245,158,11,0.22), rgba(255,255,255,0.08) 38%, transparent 66%);
 }
 
+@media (hover: none), (pointer: coarse) {
+  .cursor-spotlight,
+  .card-glow,
+  .ambient-beam {
+    display: none;
+  }
+
+  body {
+    background-attachment: scroll;
+  }
+
+  .interactive-surface:hover .card-glow {
+    opacity: 0;
+  }
+}
+
 /* ============= RESPONSIVE ============= */
 @media (max-width: 1100px) {
+  .nav-links {
+    gap: 4px;
+  }
+
+  .nav-links a {
+    padding-inline: 10px;
+  }
+
   .hero-container {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -2503,22 +2618,39 @@ footer {
     gap: 24px;
   }
   .cta-band-sub { text-align: left; }
+
+  .footer-grid {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 900px) {
+  nav {
+    padding-inline: 16px;
+  }
+
   .nav-links {
     position: absolute;
-    top: calc(100% + 8px);
-    left: 16px;
-    right: 16px;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
     display: grid;
     gap: 4px;
     padding: 12px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    background: rgba(250,250,249,0.98);
-    box-shadow: var(--shadow-lg);
-    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.54);
+    border-radius: 24px;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.82), rgba(255,255,255,0.46)),
+      rgba(247,245,255,0.78);
+    box-shadow:
+      0 24px 60px rgba(20,19,43,0.18),
+      inset 0 1px 0 rgba(255,255,255,0.78);
+    backdrop-filter: blur(24px) saturate(175%);
+    -webkit-backdrop-filter: blur(24px) saturate(175%);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-8px);
@@ -2526,6 +2658,7 @@ footer {
     transition: all 0.3s ease;
   }
   .nav-links a { display: block; padding: 12px 16px; border-radius: var(--radius-sm); }
+  .nav-links .nav-cta { text-align: center; margin-top: 4px; }
   nav.menu-open .nav-links {
     opacity: 1;
     visibility: visible;
@@ -2542,10 +2675,31 @@ footer {
   }
   
   .section { padding: 80px clamp(16px, 4vw, 32px); }
+
+  footer {
+    padding-top: 60px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 600px) {
-  nav { height: 60px; padding: 0 16px; }
+  nav { min-height: 60px; padding: 8px 14px; }
+  nav.scrolled { min-height: 60px; }
+  .nav-shell {
+    min-height: 48px;
+    padding: 8px 10px 8px 12px;
+  }
+  .nav-logo { font-size: 1rem; }
+  .nav-logo-icon { width: 30px; height: 30px; border-radius: 9px; }
+  .nav-links { top: calc(100% + 8px); }
   
   .hero { padding: 100px 16px 60px; min-height: auto; }
   .hero-headline { font-size: 2.2rem; }
@@ -2576,7 +2730,18 @@ footer {
   .form-grid { grid-template-columns: 1fr; }
   .form-group.full { grid-column: span 1; }
   
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  footer { padding: 52px 18px 28px; }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-bottom: 34px;
+  }
+  .footer-brand { grid-column: auto; }
+  .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-top: 24px;
+  }
   
   .sticky-cta { bottom: 16px; right: 16px; left: 16px; }
   .sticky-cta a { width: 100%; justify-content: center; }
@@ -2649,7 +2814,7 @@ footer {
       <li><a href="#fees">Fees</a></li>
       <li><a href="#contact" class="nav-cta">Book Demo →</a></li>
     </ul>
-    <button class="nav-menu-btn" id="navMenuBtn" aria-label="Menu">
+    <button class="nav-menu-btn" id="navMenuBtn" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -2712,10 +2877,10 @@ footer {
         <span></span><span></span><span></span><span></span><span></span>
       </div>
       <div class="hero-img-main">
-        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&h=750&fit=crop" alt="Students in classroom learning together">
+        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&h=750&fit=crop&auto=format&q=78" alt="Students in classroom learning together" width="600" height="750" loading="eager" fetchpriority="high" decoding="async">
       </div>
       <div class="hero-img-secondary">
-        <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=500&h=600&fit=crop&crop=faces" alt="Student focused on studying">
+        <img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=500&h=600&fit=crop&crop=faces&auto=format&q=78" alt="Student focused on studying" width="500" height="600" loading="eager" fetchpriority="high" decoding="async">
       </div>
       <div class="hero-float-card" id="floatCard1">
         <div class="float-label">Score Improved</div>
@@ -2763,7 +2928,7 @@ footer {
 
     <div class="about-grid">
       <div class="about-image reveal-left">
-        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=1000&fit=crop" alt="BrightPath Academy classroom environment">
+        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=1000&fit=crop&auto=format&q=76" alt="BrightPath Academy classroom environment" width="800" height="1000" loading="lazy" decoding="async">
         <div class="about-image-overlay">
           <div class="about-image-stat">
             <div><div class="num">7+</div><div class="label">Years</div></div>
@@ -2835,7 +3000,7 @@ footer {
       <div class="result-card">
         <div class="rc-header">
           <div class="rc-avatar">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces" alt="Riya">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces&auto=format&q=70" alt="Riya" width="100" height="100" loading="lazy" decoding="async">
           </div>
           <div class="rc-scores">
             <span class="rc-before">54%</span>
@@ -2852,7 +3017,7 @@ footer {
       <div class="result-card">
         <div class="rc-header">
           <div class="rc-avatar">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=faces" alt="Arjun">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=faces&auto=format&q=70" alt="Arjun" width="100" height="100" loading="lazy" decoding="async">
           </div>
           <div class="rc-scores">
             <span class="rc-before">61%</span>
@@ -2869,7 +3034,7 @@ footer {
       <div class="result-card">
         <div class="rc-header">
           <div class="rc-avatar">
-            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=faces" alt="Sneha">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=faces&auto=format&q=70" alt="Sneha" width="100" height="100" loading="lazy" decoding="async">
           </div>
           <div class="rc-scores">
             <span class="rc-before">58%</span>
@@ -2886,7 +3051,7 @@ footer {
       <div class="result-card">
         <div class="rc-header">
           <div class="rc-avatar">
-            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=faces" alt="Vikram">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=faces&auto=format&q=70" alt="Vikram" width="100" height="100" loading="lazy" decoding="async">
           </div>
           <div class="rc-scores">
             <span class="rc-before">67%</span>
@@ -3396,7 +3561,7 @@ footer {
         <ul>
           <li><a href="tel:+919876543210">+91 98765 43210</a></li>
           <li><a href="https://wa.me/919876543210">WhatsApp Us</a></li>
-          <li><a href="#">Andheri West, Mumbai</a></li>
+          <li><a href="#contact">Andheri West, Mumbai</a></li>
           <li><a href="mailto:hello@brightpathacademy.in">Email Us</a></li>
         </ul>
       </div>
@@ -3419,12 +3584,18 @@ const navEl = document.getElementById('nav');
 const navLinksEl = document.getElementById('navLinks');
 
 if (navMenuBtn && navEl) {
-  navMenuBtn.addEventListener('click', () => navEl.classList.toggle('menu-open'));
+  navMenuBtn.addEventListener('click', () => {
+    const isOpen = navEl.classList.toggle('menu-open');
+    navMenuBtn.setAttribute('aria-expanded', String(isOpen));
+  });
 }
 
 if (navLinksEl && navEl) {
   navLinksEl.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => navEl.classList.remove('menu-open'));
+    link.addEventListener('click', () => {
+      navEl.classList.remove('menu-open');
+      if (navMenuBtn) navMenuBtn.setAttribute('aria-expanded', 'false');
+    });
   });
 }
 
@@ -3432,9 +3603,24 @@ if (navLinksEl && navEl) {
 const cursorSpotlight = document.getElementById('cursorSpotlight');
 const ambientGrid = document.getElementById('ambientGrid');
 const heroSection = document.getElementById('home');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canUsePointerEffects = window.matchMedia('(hover: hover) and (pointer: fine)').matches && !prefersReducedMotion;
+let lenis = null;
 let pointerX = window.innerWidth / 2;
 let pointerY = window.innerHeight / 2;
 let pointerTicking = false;
+
+function createSmoothScroller() {
+  if (!window.Lenis || prefersReducedMotion) return null;
+  return new Lenis({
+    duration: 1.18,
+    easing: (t) => 1 - Math.pow(1 - t, 4),
+    smoothWheel: true,
+    wheelMultiplier: 0.85,
+    touchMultiplier: 1.15,
+    syncTouch: false
+  });
+}
 
 function updatePointerEffects() {
   pointerTicking = false;
@@ -3451,19 +3637,22 @@ function updatePointerEffects() {
   }
 }
 
-document.addEventListener('pointermove', (event) => {
-  pointerX = event.clientX;
-  pointerY = event.clientY;
-  if (!pointerTicking) {
-    pointerTicking = true;
-    requestAnimationFrame(updatePointerEffects);
-  }
-});
+if (canUsePointerEffects) {
+  document.addEventListener('pointermove', (event) => {
+    pointerX = event.clientX;
+    pointerY = event.clientY;
+    if (!pointerTicking) {
+      pointerTicking = true;
+      requestAnimationFrame(updatePointerEffects);
+    }
+  }, { passive: true });
+}
 
 // Create light particles in the hero so the first viewport feels alive.
 const heroSparkles = document.getElementById('heroSparkles');
 if (heroSparkles) {
-  for (let i = 0; i < 28; i++) {
+  const sparkleCount = prefersReducedMotion ? 0 : (canUsePointerEffects ? 28 : 10);
+  for (let i = 0; i < sparkleCount; i++) {
     const sparkle = document.createElement('span');
     sparkle.className = 'sparkle';
     sparkle.style.left = `${Math.random() * 100}%`;
@@ -3477,33 +3666,49 @@ if (heroSparkles) {
 
 // Add cursor-follow glow layers to important surfaces.
 const interactiveSelectors = '.result-card, .course-card, .why-card, .batch-card, .fee-card, .testimonial-card, .about-feature, .contact-info-card, .form-card, .trust-bar-inner, .aggregate-card';
-document.querySelectorAll(interactiveSelectors).forEach((surface) => {
-  surface.classList.add('interactive-surface');
-  if (!surface.querySelector(':scope > .card-glow')) {
-    const glow = document.createElement('span');
-    glow.className = 'card-glow';
-    surface.prepend(glow);
-  }
-  surface.addEventListener('pointermove', (event) => {
-    const rect = surface.getBoundingClientRect();
-    surface.style.setProperty('--mx', `${event.clientX - rect.left}px`);
-    surface.style.setProperty('--my', `${event.clientY - rect.top}px`);
+if (canUsePointerEffects) {
+  document.querySelectorAll(interactiveSelectors).forEach((surface) => {
+    surface.classList.add('interactive-surface');
+    if (!surface.querySelector(':scope > .card-glow')) {
+      const glow = document.createElement('span');
+      glow.className = 'card-glow';
+      surface.prepend(glow);
+    }
+    surface.addEventListener('pointermove', (event) => {
+      const rect = surface.getBoundingClientRect();
+      surface.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+      surface.style.setProperty('--my', `${event.clientY - rect.top}px`);
+    }, { passive: true });
   });
-});
+}
 
 // GSAP Setup
 if (window.gsap && window.ScrollTrigger) {
   gsap.registerPlugin(ScrollTrigger);
   if (window.ScrollToPlugin) gsap.registerPlugin(window.ScrollToPlugin);
+  ScrollTrigger.config({ ignoreMobileResize: true });
+
+  lenis = createSmoothScroller();
+  if (lenis) {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
 
   // Scroll Progress
   const scrollProgress = document.getElementById('scrollProgress');
+  let scrollTicking = false;
   window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    if (scrollProgress) scrollProgress.style.width = progress + '%';
-  });
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      if (scrollProgress) scrollProgress.style.width = progress + '%';
+      scrollTicking = false;
+    });
+  }, { passive: true });
 
   // Nav scroll effect
   const stickyCta = document.getElementById('stickyCta');
@@ -3523,12 +3728,12 @@ if (window.gsap && window.ScrollTrigger) {
   // Hero animations
   const heroTl = gsap.timeline({ delay: 0.2 });
   heroTl
-    .to('#heroBadge', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
-    .to('#heroHeadline', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.3')
-    .to('#heroDesc', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
-    .to('#heroActions', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3')
-    .to('#heroStats', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.3')
-    .to('#heroVisual', { opacity: 1, x: 0, duration: 1, ease: 'power3.out' }, '-=0.8');
+    .to('#heroBadge', { opacity: 1, y: 0, duration: 0.65, ease: 'power4.out' })
+    .to('#heroHeadline', { opacity: 1, y: 0, duration: 0.9, ease: 'power4.out' }, '-=0.35')
+    .to('#heroDesc', { opacity: 1, y: 0, duration: 0.7, ease: 'power4.out' }, '-=0.45')
+    .to('#heroActions', { opacity: 1, y: 0, duration: 0.7, ease: 'power4.out' }, '-=0.35')
+    .to('#heroStats', { opacity: 1, y: 0, duration: 0.7, ease: 'power4.out' }, '-=0.35')
+    .to('#heroVisual', { opacity: 1, x: 0, duration: 1.1, ease: 'power4.out' }, '-=0.85');
 
   // Floating card animation
   gsap.to('#floatCard1', {
@@ -3555,11 +3760,11 @@ if (window.gsap && window.ScrollTrigger) {
       y: 0,
       duration: 0.6,
       delay: 0.1 * i,
-      ease: 'power3.out',
+      ease: 'power4.out',
       scrollTrigger: {
         trigger: '.trust-bar',
         start: 'top 90%',
-        toggleActions: 'play none none reverse'
+        toggleActions: 'play none none none'
       }
     });
   });
@@ -3567,37 +3772,37 @@ if (window.gsap && window.ScrollTrigger) {
   // Reveal animations
   gsap.utils.toArray('.reveal-up').forEach(elem => {
     gsap.to(elem, {
-      opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: { trigger: elem, start: 'top 85%', toggleActions: 'play none none reverse' }
+      opacity: 1, y: 0, duration: 0.85, ease: 'power4.out',
+      scrollTrigger: { trigger: elem, start: 'top 85%', toggleActions: 'play none none none' }
     });
   });
 
   gsap.utils.toArray('.reveal-left').forEach(elem => {
     gsap.to(elem, {
-      opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: { trigger: elem, start: 'top 85%', toggleActions: 'play none none reverse' }
+      opacity: 1, x: 0, duration: 0.85, ease: 'power4.out',
+      scrollTrigger: { trigger: elem, start: 'top 85%', toggleActions: 'play none none none' }
     });
   });
 
   gsap.utils.toArray('.reveal-right').forEach(elem => {
     gsap.to(elem, {
-      opacity: 1, x: 0, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: { trigger: elem, start: 'top 85%', toggleActions: 'play none none reverse' }
+      opacity: 1, x: 0, duration: 0.85, ease: 'power4.out',
+      scrollTrigger: { trigger: elem, start: 'top 85%', toggleActions: 'play none none none' }
     });
   });
 
   gsap.utils.toArray('.reveal-scale').forEach(elem => {
     gsap.to(elem, {
-      opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: { trigger: elem, start: 'top 85%', toggleActions: 'play none none reverse' }
+      opacity: 1, scale: 1, duration: 0.85, ease: 'power4.out',
+      scrollTrigger: { trigger: elem, start: 'top 85%', toggleActions: 'play none none none' }
     });
   });
 
   // Stagger children
   gsap.utils.toArray('.stagger-in').forEach(container => {
     gsap.to(container.children, {
-      opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power3.out',
-      scrollTrigger: { trigger: container, start: 'top 80%', toggleActions: 'play none none reverse' }
+      opacity: 1, y: 0, duration: 0.7, stagger: 0.08, ease: 'power4.out',
+      scrollTrigger: { trigger: container, start: 'top 80%', toggleActions: 'play none none none' }
     });
   });
 
@@ -3631,11 +3836,11 @@ if (window.gsap && window.ScrollTrigger) {
     gsap.to(bar, {
       width: width + '%',
       duration: 1.5,
-      ease: 'power3.out',
+      ease: 'power4.out',
       scrollTrigger: {
         trigger: bar,
         start: 'top 85%',
-        toggleActions: 'play none none reverse'
+        toggleActions: 'play none none none'
       }
     });
   });
@@ -3648,7 +3853,9 @@ if (window.gsap && window.ScrollTrigger) {
       const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        if (window.ScrollToPlugin) {
+        if (lenis) {
+          lenis.scrollTo(target, { offset: -80, duration: 1.12 });
+        } else if (window.ScrollToPlugin) {
           gsap.to(window, { duration: 1, scrollTo: { y: target, offsetY: 80 }, ease: 'power3.inOut' });
         } else {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -3680,14 +3887,28 @@ if (window.gsap && window.ScrollTrigger) {
   // Fallback without GSAP
   const fallbackScrollProgress = document.getElementById('scrollProgress');
   const fallbackStickyCta = document.getElementById('stickyCta');
+  lenis = createSmoothScroller();
+  if (lenis) {
+    const raf = (time) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+  }
 
+  let fallbackScrollTicking = false;
   window.addEventListener('scroll', () => {
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
-    if (fallbackScrollProgress) fallbackScrollProgress.style.width = progress + '%';
-    if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 100);
-    if (fallbackStickyCta) fallbackStickyCta.classList.toggle('visible', window.scrollY > 100);
-  });
+    if (fallbackScrollTicking) return;
+    fallbackScrollTicking = true;
+    requestAnimationFrame(() => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+      if (fallbackScrollProgress) fallbackScrollProgress.style.width = progress + '%';
+      if (navEl) navEl.classList.toggle('scrolled', window.scrollY > 100);
+      if (fallbackStickyCta) fallbackStickyCta.classList.toggle('visible', window.scrollY > 100);
+      fallbackScrollTicking = false;
+    });
+  }, { passive: true });
 
   // Show all hidden elements
   document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .stagger-in > *, #heroBadge, #heroHeadline, #heroDesc, #heroActions, #heroStats, #heroVisual, .trust-item').forEach(el => {
@@ -3720,7 +3941,11 @@ if (window.gsap && window.ScrollTrigger) {
       const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (lenis) {
+          lenis.scrollTo(target, { offset: -80, duration: 1.12 });
+        } else {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
     });
   });
