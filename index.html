@@ -4,7 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="BrightPath Academy — Expert Maths & Science coaching for Classes 6-12 in Andheri West, Mumbai. Small batches of 8-12 students. 92% students improve. Book a free demo class today.">
-<meta name="theme-color" content="#0F0E1A">
+<meta name="theme-color" content="#111827">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="BrightPath Academy | Maths & Science Tuition in Mumbai">
+<meta property="og:description" content="Small-batch Maths and Science coaching for Classes 6-12 in Andheri West. Book a free demo class.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&h=630&fit=crop&auto=format&q=72">
+<meta name="twitter:card" content="summary_large_image">
 <title>BrightPath Academy | Maths & Science Tuition in Mumbai</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,6 +75,32 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
+
+::selection { background: rgba(201,168,76,0.28); color: var(--ink); }
+
+.skip-link {
+  position: fixed;
+  top: 10px; left: 10px;
+  z-index: 10000;
+  transform: translateY(-140%);
+  background: var(--gold);
+  color: var(--ink);
+  padding: 10px 14px;
+  border-radius: var(--r-sm);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s var(--ease);
+}
+.skip-link:focus { transform: none; }
+
+:focus-visible {
+  outline: 3px solid rgba(201,168,76,0.75);
+  outline-offset: 3px;
+}
+
+img { max-width: 100%; }
 
 /* ===================== SCROLL PROGRESS ===================== */
 .scroll-bar {
@@ -1406,7 +1438,17 @@ nav.open .nav-ham span:nth-child(3) { top: 17px; transform: rotate(-45deg); }
   box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
   background: white;
 }
+.fg input.is-invalid, .fg select.is-invalid {
+  border-color: #DC2626;
+  background: #FFF7F7;
+}
 .fg input::placeholder { color: var(--text-muted); }
+.field-error {
+  min-height: 16px;
+  font-size: 0.68rem;
+  line-height: 1.3;
+  color: #B91C1C;
+}
 .form-submit {
   width: 100%;
   margin-top: 14px;
@@ -1425,6 +1467,87 @@ nav.open .nav-ham span:nth-child(3) { top: 17px; transform: rotate(-45deg); }
 .form-submit:hover { background: var(--gold); color: var(--ink); transform: translateY(-2px); }
 .form-submit:disabled { cursor: default; }
 .form-note { text-align: center; font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; }
+.form-status {
+  margin-top: 14px;
+  padding: 13px 14px;
+  border-radius: var(--r-sm);
+  background: var(--green-lt);
+  color: var(--green);
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: none;
+}
+.form-status.show { display: block; }
+.demo-assurance {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 18px;
+}
+.demo-assurance span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  background: var(--cream);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-body);
+  text-align: center;
+}
+
+/* ===================== FAQ ===================== */
+.faq { background: white; }
+.faq-wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  display: grid;
+  gap: 12px;
+}
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--cream);
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.faq-item[open] {
+  background: white;
+  border-color: var(--border-gold);
+  box-shadow: var(--shadow-sm);
+}
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 46px 18px 20px;
+  position: relative;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-ink);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+';
+  position: absolute;
+  right: 18px; top: 50%;
+  transform: translateY(-50%);
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--gold-pale);
+  color: var(--ink);
+  font-weight: 800;
+}
+.faq-item[open] summary::after { content: '-'; }
+.faq-item p {
+  padding: 0 20px 18px;
+  color: var(--text-body);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
 
 /* ===================== FOOTER ===================== */
 footer {
@@ -1543,8 +1666,11 @@ footer::before {
 @media (max-width: 600px) {
   nav { padding: 8px 12px; }
   .nav-inner { padding: 7px 8px 7px 12px; }
+  .nav-logo { font-size: 1rem; }
   .hero { padding: 96px 16px 56px; min-height: auto; }
   .hero-h1 { font-size: clamp(2rem, 8vw, 2.4rem); }
+  .hero-eyebrow { align-items: flex-start; white-space: normal; }
+  .hero-desc { font-size: 0.95rem; }
   .hero-trust { flex-direction: column; gap: 10px; align-items: flex-start; }
   .hero-stat { padding: 0; border: none; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px; width: 100%; }
   .hero-stat:first-child { border-top: none; padding-top: 0; }
@@ -1562,6 +1688,8 @@ footer::before {
   .agg-big { font-size: 3.5rem; }
   .form-grid { grid-template-columns: 1fr; }
   .fg.span2 { grid-column: span 1; }
+  .demo-assurance { grid-template-columns: 1fr; }
+  .contact-info, .contact-form-wrap { padding: 26px 18px; }
   .footer-top { grid-template-columns: 1fr; }
   .footer-brand { grid-column: auto; }
   .footer-bottom { flex-direction: column; text-align: center; }
@@ -1570,9 +1698,11 @@ footer::before {
   .result-pill { flex-direction: column; align-items: flex-start; gap: 8px; }
   .rp-score { align-self: flex-end; }
   .hero-panel-footer { justify-content: center; }
+  .back-to-top { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
 }
 
@@ -1596,9 +1726,1307 @@ footer::before {
 }
 .back-to-top.show { opacity: 1; transform: none; pointer-events: auto; }
 .back-to-top:hover { background: var(--gold); color: var(--ink); }
+
+/* ===================== UI REFRESH: MODERN ACADEMY ===================== */
+:root {
+  --ink:       #111827;
+  --ink-2:     #182033;
+  --ink-3:     #24304A;
+  --gold:      #FF7A59;
+  --gold-lt:   #FFC857;
+  --gold-pale: #FFF1E8;
+  --cream:     #F7F8FB;
+  --cream-2:   #EEF6F5;
+  --green:     #0F8A7B;
+  --green-lt:  #E7F7F4;
+  --red-lt:    #FFF0EE;
+  --blue-lt:   #EAF2FF;
+  --purple-lt: #F0EEFF;
+  --text-ink:    #111827;
+  --text-body:   #475569;
+  --text-muted:  #7A8699;
+  --text-light:  #F9FAFB;
+  --border:      rgba(17,24,39,0.10);
+  --border-gold: rgba(255,122,89,0.38);
+  --border-lite: rgba(255,255,255,0.16);
+  --shadow-xs: 0 1px 2px rgba(17,24,39,0.05);
+  --shadow-sm: 0 8px 24px rgba(17,24,39,0.06);
+  --shadow-md: 0 18px 44px rgba(17,24,39,0.09);
+  --shadow-lg: 0 24px 70px rgba(17,24,39,0.13);
+  --shadow-xl: 0 34px 90px rgba(17,24,39,0.17);
+  --shadow-gold: 0 18px 42px rgba(255,122,89,0.28);
+  --r-xs: 6px;
+  --r-sm: 8px;
+  --r-md: 8px;
+  --r-lg: 8px;
+  --r-xl: 8px;
+  --brand-teal: #0EA5A3;
+  --brand-blue: #4F7CFF;
+  --brand-coral: #FF7A59;
+  --brand-sun: #FFC857;
+}
+
+html { scrollbar-color: var(--brand-coral) var(--ink); }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: linear-gradient(var(--brand-coral), var(--brand-teal)); }
+
+body {
+  background:
+    linear-gradient(90deg, rgba(17,24,39,0.035) 1px, transparent 1px),
+    linear-gradient(rgba(17,24,39,0.03) 1px, transparent 1px),
+    var(--cream);
+  background-size: 56px 56px;
+}
+
+::selection { background: rgba(14,165,163,0.22); color: var(--ink); }
+:focus-visible { outline-color: rgba(14,165,163,0.72); }
+.scroll-bar { background: linear-gradient(90deg, var(--brand-coral), var(--brand-sun), var(--brand-teal)); }
+
+nav { padding-top: 18px; }
+.nav-inner {
+  max-width: 1160px;
+  padding: 8px 9px 8px 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.82);
+  border-color: rgba(17,24,39,0.10);
+  box-shadow: 0 18px 60px rgba(17,24,39,0.10);
+}
+@supports (backdrop-filter: blur(18px)) {
+  .nav-inner { background: rgba(255,255,255,0.72); }
+}
+nav.scrolled .nav-inner { background: rgba(255,255,255,0.94); }
+.nav-logo {
+  font-family: var(--sans);
+  font-size: 0.94rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.nav-logo-mark,
+.footer-logo-mark {
+  background: linear-gradient(135deg, var(--brand-coral), var(--brand-sun));
+  color: var(--ink);
+  border-radius: 8px;
+}
+.nav-links { gap: 4px; }
+.nav-links a {
+  color: #526071;
+  font-weight: 700;
+  padding: 8px 11px;
+  border-radius: 8px;
+}
+.nav-links a:hover { color: var(--ink); background: rgba(14,165,163,0.09); }
+.nav-book {
+  background: var(--ink) !important;
+  color: white !important;
+  box-shadow: 0 10px 28px rgba(17,24,39,0.18);
+  border-radius: 8px !important;
+}
+.nav-book:hover {
+  background: var(--brand-coral) !important;
+  color: var(--ink) !important;
+}
+
+.hero {
+  min-height: 94vh;
+  padding-top: 128px;
+  background: #0F172A;
+}
+.hero::before {
+  background:
+    linear-gradient(90deg, rgba(9,13,24,0.92) 0%, rgba(9,13,24,0.76) 48%, rgba(9,13,24,0.42) 100%),
+    linear-gradient(180deg, rgba(9,13,24,0.20), rgba(9,13,24,0.88)),
+    url("https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1800&h=1200&fit=crop&auto=format&q=78") center/cover;
+}
+.hero::after {
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(90deg, rgba(0,0,0,0.32), transparent 78%);
+  -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0.32), transparent 78%);
+}
+.hero-aurora,
+#heroCanvas { display: none; }
+.hero-vignette {
+  background: linear-gradient(120deg, rgba(14,165,163,0.24), transparent 34%, rgba(255,122,89,0.16) 72%, transparent);
+  mix-blend-mode: screen;
+}
+.hero-fade-bottom { background: linear-gradient(transparent, var(--cream)); height: 120px; }
+.hero-wrap {
+  max-width: 1160px;
+  grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.72fr);
+  gap: clamp(36px, 6vw, 86px);
+}
+.hero-eyebrow {
+  color: #CFF8F5;
+  background: rgba(14,165,163,0.16);
+  border-color: rgba(14,165,163,0.34);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.14);
+}
+.hero-eyebrow-dot { background: var(--brand-teal); color: white; }
+.hero-h1 {
+  max-width: 760px;
+  font-size: clamp(3rem, 7vw, 6.6rem);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+.hero-h1 em {
+  color: transparent;
+  background: linear-gradient(90deg, var(--brand-sun), var(--brand-coral));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.hero-sub-head {
+  max-width: 620px;
+  margin-top: 18px;
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
+  color: rgba(255,255,255,0.76);
+  letter-spacing: 0;
+}
+.hero-desc {
+  max-width: 560px;
+  color: rgba(255,255,255,0.74);
+  font-size: 1.06rem;
+}
+.btn-demo,
+.btn-ink-gold,
+.form-submit,
+.fee-btn.solid {
+  background: linear-gradient(135deg, var(--brand-coral), var(--brand-sun));
+  color: var(--ink);
+  border-radius: 8px;
+  box-shadow: var(--shadow-gold);
+}
+.btn-demo:hover,
+.btn-ink-gold:hover,
+.form-submit:hover,
+.fee-btn.solid:hover {
+  background: linear-gradient(135deg, var(--brand-sun), var(--brand-coral));
+  transform: translateY(-3px);
+}
+.btn-demo .arrow { background: rgba(17,24,39,0.14); }
+.btn-ghost {
+  border-radius: 8px;
+  color: rgba(255,255,255,0.82);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.20);
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.14); }
+.hero-stat { border-color: rgba(255,255,255,0.16); }
+.hstat-n { color: var(--brand-sun); }
+.hstat-l { color: rgba(255,255,255,0.56); }
+.hero-panel {
+  border-radius: 12px;
+  padding: 22px;
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.22);
+  box-shadow: 0 28px 90px rgba(0,0,0,0.34);
+}
+@supports (backdrop-filter: blur(18px)) {
+  .hero-panel { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+}
+.hero-panel-head { color: rgba(255,255,255,0.60); }
+.result-pill {
+  border-radius: 8px;
+  background: rgba(255,255,255,0.11);
+  border-color: rgba(255,255,255,0.13);
+}
+.rp-after,
+.hero-panel-rate { color: #7EE7D8; }
+.rp-gain,
+.hero-badge-live {
+  background: rgba(14,165,163,0.18);
+  color: #9AF2E8;
+  border-color: rgba(14,165,163,0.28);
+}
+.live-dot { background: #7EE7D8; }
+
+.trust-bar {
+  margin-top: -42px;
+  padding-inline: clamp(16px, 4vw, 48px);
+}
+.trust-bar-inner {
+  max-width: 1160px;
+  padding: 18px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.92);
+  border-color: rgba(17,24,39,0.09);
+  box-shadow: 0 24px 70px rgba(17,24,39,0.12);
+}
+.trust-item {
+  padding: 10px;
+  border-radius: 8px;
+}
+.trust-icon,
+.af-icon,
+.why-icon,
+.batch-icon,
+.ci-ic {
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+.ti-gold, .wi-gold { background: #FFF1E8; }
+.ti-blue, .wi-blue { background: #EAF2FF; }
+.ti-green, .wi-green { background: #E7F7F4; }
+.ti-purp, .wi-purp { background: #F0EEFF; }
+
+.section {
+  padding: 112px clamp(18px, 5vw, 64px);
+}
+.section-inner { max-width: 1160px; }
+.section-header {
+  max-width: 720px;
+  margin-bottom: 62px;
+}
+.section-tag {
+  color: var(--brand-teal);
+  letter-spacing: 0.16em;
+}
+.section-tag::before,
+.section-tag::after {
+  background: linear-gradient(90deg, var(--brand-coral), var(--brand-teal));
+}
+.section-title {
+  font-size: clamp(2.25rem, 4.2vw, 3.8rem);
+  letter-spacing: -0.045em;
+}
+.section-title em {
+  color: var(--brand-coral);
+}
+.section-sub {
+  max-width: 620px;
+  margin-inline: auto;
+  color: #5B667A;
+}
+
+.about,
+.why,
+.fees,
+.faq {
+  background:
+    radial-gradient(circle at 8% 8%, rgba(14,165,163,0.08), transparent 28%),
+    radial-gradient(circle at 92% 18%, rgba(255,122,89,0.08), transparent 24%),
+    #FFFFFF;
+}
+.about-grid {
+  gap: clamp(34px, 6vw, 72px);
+}
+.about-img {
+  border-radius: 12px;
+  box-shadow: 0 28px 80px rgba(17,24,39,0.18);
+}
+.about-img::after {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(255,255,255,0.38);
+  border-radius: 8px;
+  pointer-events: none;
+}
+.about-img-bar {
+  justify-content: space-between;
+  background: linear-gradient(transparent, rgba(17,24,39,0.90));
+}
+.about-p {
+  font-size: 1.02rem;
+  color: #435066;
+}
+.af-card,
+.rc,
+.testi,
+.why-card,
+.batch-card,
+.fee-card,
+.contact-info,
+.contact-form-wrap,
+.faq-item {
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+.af-card,
+.why-card {
+  background: rgba(255,255,255,0.82);
+}
+.af-card:hover,
+.why-card:hover,
+.testi:hover,
+.faq-item[open] {
+  border-color: rgba(14,165,163,0.28);
+  box-shadow: var(--shadow-md);
+}
+
+.results,
+.batches,
+.contact {
+  background:
+    linear-gradient(135deg, rgba(14,165,163,0.08), transparent 32%),
+    linear-gradient(315deg, rgba(79,124,255,0.08), transparent 30%),
+    var(--cream);
+}
+.results-grid {
+  gap: 18px;
+}
+.rc {
+  background: rgba(255,255,255,0.92);
+}
+.rc::after,
+.rc-fill {
+  background: linear-gradient(90deg, var(--brand-coral), var(--brand-teal));
+}
+.rc-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  box-shadow: 0 0 0 4px rgba(14,165,163,0.10);
+}
+.rc-to {
+  color: var(--brand-teal);
+}
+.rc-gain {
+  background: var(--green-lt);
+  color: var(--green);
+  border-radius: 8px;
+}
+.agg-band {
+  background:
+    linear-gradient(135deg, rgba(14,165,163,0.22), transparent 42%),
+    linear-gradient(315deg, rgba(255,122,89,0.24), transparent 36%),
+    var(--ink);
+  border-radius: 12px;
+}
+.agg-big {
+  color: var(--brand-sun);
+}
+.testi {
+  background: rgba(255,255,255,0.94);
+}
+.testi-stars {
+  color: var(--brand-coral);
+}
+.testi-av {
+  border-radius: 8px;
+}
+
+.courses {
+  background:
+    linear-gradient(135deg, rgba(14,165,163,0.18), transparent 34%),
+    linear-gradient(315deg, rgba(255,122,89,0.16), transparent 30%),
+    #111827;
+}
+.courses::before {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.055) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.course-card {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.13);
+  box-shadow: 0 24px 68px rgba(0,0,0,0.16);
+}
+.course-card.featured {
+  background: linear-gradient(180deg, rgba(255,122,89,0.14), rgba(255,255,255,0.08));
+  border-color: rgba(255,122,89,0.34);
+}
+.course-card:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(14,165,163,0.42);
+}
+.course-card::after,
+.li-dot {
+  background: linear-gradient(90deg, var(--brand-coral), var(--brand-teal));
+}
+.course-level {
+  color: #FFDD96;
+  background: rgba(255,200,87,0.12);
+  border: 1px solid rgba(255,200,87,0.18);
+}
+.course-price-amt {
+  color: #FFDD96;
+}
+
+.why-grid,
+.batch-grid,
+.fees-grid,
+.courses-grid {
+  gap: 18px;
+}
+.why-card {
+  padding: 26px;
+}
+.why-n {
+  color: rgba(255,122,89,0.18);
+}
+.why-card h3,
+.batch-title,
+.fee-classes,
+.contact-info h3,
+.contact-form-wrap h3 {
+  letter-spacing: -0.02em;
+}
+.batch-card {
+  background: rgba(255,255,255,0.94);
+}
+.batch-card::before {
+  background: linear-gradient(90deg, var(--brand-coral), var(--brand-teal));
+}
+.batch-val.hi {
+  color: var(--brand-blue);
+}
+.bb-open {
+  background: var(--green-lt);
+  color: var(--brand-teal);
+}
+.bb-filling {
+  background: var(--gold-pale);
+  color: #B45309;
+}
+
+.fee-card {
+  background: rgba(255,255,255,0.88);
+}
+.fee-card.popular {
+  background:
+    linear-gradient(145deg, rgba(255,122,89,0.18), transparent 36%),
+    var(--ink);
+  box-shadow: 0 30px 90px rgba(17,24,39,0.24);
+}
+.fee-pop-badge {
+  background: linear-gradient(135deg, var(--brand-sun), var(--brand-coral));
+}
+.fee-tag,
+.fee-card.popular .fee-price {
+  color: var(--brand-coral);
+}
+.fee-check {
+  color: var(--brand-teal);
+}
+.fee-btn {
+  border-radius: 8px;
+}
+.fee-btn.outline {
+  border-color: rgba(14,165,163,0.25);
+  color: var(--brand-teal);
+  background: rgba(14,165,163,0.06);
+}
+.fee-btn.outline:hover {
+  background: var(--brand-teal);
+  color: white;
+}
+.fee-note {
+  background: rgba(255,255,255,0.74);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 18px;
+  display: table;
+  margin-inline: auto;
+}
+
+.cta-band {
+  background:
+    linear-gradient(90deg, rgba(14,165,163,0.28), transparent 38%),
+    linear-gradient(315deg, rgba(255,122,89,0.28), transparent 34%),
+    var(--ink);
+}
+.cta-band::before {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+.cta-band-inner {
+  max-width: 1160px;
+}
+.cta-band h2 {
+  letter-spacing: -0.045em;
+}
+.cta-band h2 em {
+  color: #FFDD96;
+}
+
+.contact-info,
+.contact-form-wrap {
+  background: rgba(255,255,255,0.92);
+}
+.ci-item:hover {
+  padding-left: 0;
+  background: rgba(14,165,163,0.05);
+  margin-inline: -10px;
+  padding-inline: 10px;
+  border-radius: 8px;
+}
+.ci-val a {
+  color: var(--brand-blue);
+}
+.wa-link {
+  background: #12B886;
+  border-radius: 8px;
+}
+.wa-link:hover {
+  background: #0EA678;
+}
+.fg input,
+.fg select {
+  background: #F9FAFB;
+  border-radius: 8px;
+}
+.fg input:focus,
+.fg select:focus {
+  border-color: var(--brand-teal);
+  box-shadow: 0 0 0 4px rgba(14,165,163,0.13);
+}
+.form-status {
+  background: var(--green-lt);
+  color: var(--green);
+}
+.demo-assurance span {
+  background: rgba(14,165,163,0.06);
+  border-color: rgba(14,165,163,0.14);
+}
+
+.faq-wrap {
+  max-width: 920px;
+}
+.faq-item {
+  background: rgba(255,255,255,0.90);
+}
+.faq-item summary {
+  font-size: 1rem;
+}
+.faq-item summary::after {
+  background: rgba(14,165,163,0.10);
+  color: var(--brand-teal);
+}
+
+footer {
+  background:
+    linear-gradient(135deg, rgba(14,165,163,0.16), transparent 34%),
+    linear-gradient(315deg, rgba(255,122,89,0.14), transparent 32%),
+    #111827;
+}
+.footer-col ul a:hover {
+  color: #FFDD96;
+}
+.back-to-top {
+  border-radius: 8px;
+  background: white;
+  color: var(--ink);
+  border-color: rgba(17,24,39,0.12);
+  box-shadow: var(--shadow-md);
+}
+.back-to-top:hover {
+  background: var(--brand-coral);
+  color: var(--ink);
+}
+
+@media (max-width: 1100px) {
+  .hero-wrap {
+    grid-template-columns: 1fr;
+  }
+  .hero-panel {
+    max-width: 640px;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-links {
+    border-radius: 12px;
+    border-color: rgba(17,24,39,0.10);
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding-top: 112px;
+    background-position: center;
+  }
+  .hero::before {
+    background:
+      linear-gradient(180deg, rgba(9,13,24,0.90), rgba(9,13,24,0.78)),
+      url("https://images.unsplash.com/photo-1509062522246-3755977927d7?w=900&h=1300&fit=crop&auto=format&q=72") center/cover;
+  }
+  .hero-h1 {
+    font-size: clamp(2.65rem, 13vw, 4.2rem);
+    letter-spacing: -0.055em;
+  }
+  .hero-panel {
+    padding: 18px;
+  }
+  .section {
+    padding-block: 76px;
+  }
+  .section-header {
+    margin-bottom: 42px;
+  }
+  .section-title {
+    font-size: clamp(2rem, 10vw, 2.9rem);
+  }
+  .trust-bar {
+    margin-top: -26px;
+  }
+  .trust-bar-inner {
+    border-radius: 12px;
+  }
+  .about-img {
+    aspect-ratio: 1 / 1.08;
+  }
+  .fee-note {
+    display: block;
+  }
+}
+
+/* ===================== GRADIENT SURFACE PASS ===================== */
+:root {
+  --surface-warm:
+    linear-gradient(145deg, rgba(255,255,255,0.92), rgba(255,241,232,0.74) 52%, rgba(231,247,244,0.84));
+  --surface-cool:
+    linear-gradient(145deg, rgba(255,255,255,0.90), rgba(234,242,255,0.76) 48%, rgba(240,238,255,0.72));
+  --surface-mint:
+    linear-gradient(145deg, rgba(255,255,255,0.92), rgba(231,247,244,0.78) 56%, rgba(255,248,226,0.74));
+  --surface-card:
+    linear-gradient(155deg, rgba(255,255,255,0.92), rgba(255,241,232,0.46) 48%, rgba(231,247,244,0.58));
+  --surface-card-alt:
+    linear-gradient(155deg, rgba(255,255,255,0.90), rgba(234,242,255,0.54) 48%, rgba(255,241,232,0.44));
+}
+
+.about,
+.fees,
+.faq {
+  background:
+    radial-gradient(circle at 12% 14%, rgba(255,122,89,0.18), transparent 30%),
+    radial-gradient(circle at 86% 18%, rgba(14,165,163,0.18), transparent 28%),
+    radial-gradient(circle at 50% 96%, rgba(255,200,87,0.16), transparent 32%),
+    linear-gradient(135deg, #FFF7F0 0%, #F3FBFA 52%, #F7F8FF 100%);
+}
+
+.why {
+  background:
+    radial-gradient(circle at 10% 12%, rgba(79,124,255,0.16), transparent 30%),
+    radial-gradient(circle at 86% 16%, rgba(255,122,89,0.16), transparent 28%),
+    linear-gradient(135deg, #F8FAFF 0%, #F1FAF8 50%, #FFF5EE 100%);
+}
+
+.results,
+.batches,
+.contact {
+  background:
+    radial-gradient(circle at 8% 10%, rgba(14,165,163,0.18), transparent 30%),
+    radial-gradient(circle at 92% 18%, rgba(79,124,255,0.16), transparent 30%),
+    radial-gradient(circle at 50% 102%, rgba(255,122,89,0.15), transparent 34%),
+    linear-gradient(135deg, #F3FBFA 0%, #F8FAFF 48%, #FFF6EF 100%);
+}
+
+.trust-bar-inner,
+.af-card,
+.rc,
+.testi,
+.why-card,
+.batch-card,
+.fee-card,
+.contact-info,
+.contact-form-wrap,
+.faq-item {
+  background: var(--surface-card);
+  border-color: rgba(255,255,255,0.62);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.78),
+    0 18px 46px rgba(17,24,39,0.08);
+}
+
+.nav-inner,
+nav.scrolled .nav-inner {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.84), rgba(255,241,232,0.58) 48%, rgba(231,247,244,0.66));
+}
+@supports (backdrop-filter: blur(18px)) {
+  .nav-inner,
+  nav.scrolled .nav-inner {
+    background:
+      linear-gradient(145deg, rgba(255,255,255,0.72), rgba(255,241,232,0.48) 48%, rgba(231,247,244,0.54));
+  }
+}
+
+.rc:nth-child(even),
+.testi:nth-child(even),
+.why-card:nth-child(even),
+.batch-card:nth-child(even),
+.fee-card:nth-child(odd),
+.faq-item:nth-child(even) {
+  background: var(--surface-card-alt);
+}
+
+.contact-form-wrap,
+.fee-card.popular + .fee-card,
+.faq-item[open] {
+  background: var(--surface-mint);
+}
+
+.fee-card.popular {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,200,87,0.20), transparent 34%),
+    radial-gradient(circle at 86% 18%, rgba(14,165,163,0.18), transparent 30%),
+    linear-gradient(145deg, #111827 0%, #182033 58%, #24304A 100%);
+}
+
+.course-card {
+  background:
+    linear-gradient(155deg, rgba(255,255,255,0.13), rgba(14,165,163,0.10) 48%, rgba(255,122,89,0.10));
+}
+.course-card.featured {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255,200,87,0.18), transparent 36%),
+    linear-gradient(155deg, rgba(255,122,89,0.16), rgba(255,255,255,0.10) 48%, rgba(14,165,163,0.12));
+}
+.course-card:hover {
+  background:
+    linear-gradient(155deg, rgba(255,255,255,0.17), rgba(14,165,163,0.14) 48%, rgba(255,122,89,0.13));
+}
+
+.fg input,
+.fg select,
+.demo-assurance span,
+.fee-note {
+  background: linear-gradient(145deg, rgba(255,255,255,0.88), rgba(231,247,244,0.54));
+}
+
+.ci-item:hover {
+  background: linear-gradient(90deg, rgba(14,165,163,0.10), rgba(255,122,89,0.07));
+}
+
+.af-card:hover,
+.why-card:hover,
+.testi:hover,
+.rc:hover,
+.batch-card:hover {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.94), rgba(231,247,244,0.64) 48%, rgba(255,241,232,0.58));
+}
+
+.fg input:focus,
+.fg select:focus {
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.98), rgba(231,247,244,0.50));
+}
+
+.back-to-top {
+  background: linear-gradient(145deg, rgba(255,255,255,0.96), rgba(255,241,232,0.84));
+}
+
+/* ===================== CONTRAST BOOST: DARKER, PUNCHIER ===================== */
+:root {
+  --ink: #0B1020;
+  --ink-2: #121A2C;
+  --ink-3: #1B2942;
+  --cream: #EDEFF7;
+  --text-ink: #0B1020;
+  --text-body: #334155;
+  --text-muted: #64748B;
+  --shadow-sm: 0 12px 34px rgba(11,16,32,0.13);
+  --shadow-md: 0 22px 58px rgba(11,16,32,0.17);
+  --shadow-lg: 0 30px 78px rgba(11,16,32,0.22);
+  --shadow-xl: 0 42px 110px rgba(11,16,32,0.28);
+  --shadow-gold: 0 18px 48px rgba(255,122,89,0.38);
+  --surface-card:
+    linear-gradient(145deg, rgba(255,255,255,0.88), rgba(255,221,202,0.62) 45%, rgba(186,237,231,0.68));
+  --surface-card-alt:
+    linear-gradient(145deg, rgba(248,250,255,0.88), rgba(204,218,255,0.58) 42%, rgba(255,221,202,0.58));
+  --surface-mint:
+    linear-gradient(145deg, rgba(236,255,252,0.90), rgba(181,237,229,0.66) 50%, rgba(255,238,191,0.58));
+}
+
+body {
+  background:
+    radial-gradient(circle at 8% 6%, rgba(255,122,89,0.18), transparent 26%),
+    radial-gradient(circle at 92% 10%, rgba(14,165,163,0.18), transparent 28%),
+    linear-gradient(90deg, rgba(11,16,32,0.08) 1px, transparent 1px),
+    linear-gradient(rgba(11,16,32,0.07) 1px, transparent 1px),
+    #E6EAF4;
+  background-size: auto, auto, 48px 48px, 48px 48px, auto;
+}
+
+.nav-inner,
+nav.scrolled .nav-inner {
+  background:
+    linear-gradient(145deg, rgba(245,248,255,0.86), rgba(255,220,200,0.70) 45%, rgba(193,239,234,0.76));
+  border-color: rgba(11,16,32,0.18);
+  box-shadow: 0 18px 60px rgba(11,16,32,0.20);
+}
+@supports (backdrop-filter: blur(18px)) {
+  .nav-inner,
+  nav.scrolled .nav-inner {
+    background:
+      linear-gradient(145deg, rgba(245,248,255,0.72), rgba(255,220,200,0.58) 45%, rgba(193,239,234,0.62));
+  }
+}
+
+.hero::before {
+  background:
+    linear-gradient(90deg, rgba(5,8,18,0.96) 0%, rgba(7,11,24,0.84) 47%, rgba(7,11,24,0.52) 100%),
+    linear-gradient(180deg, rgba(5,8,18,0.30), rgba(5,8,18,0.92)),
+    url("https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1800&h=1200&fit=crop&auto=format&q=78") center/cover;
+}
+.hero-vignette {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255,122,89,0.34), transparent 28%),
+    radial-gradient(circle at 70% 18%, rgba(14,165,163,0.28), transparent 30%),
+    linear-gradient(120deg, rgba(14,165,163,0.28), transparent 38%, rgba(255,122,89,0.22) 76%, transparent);
+}
+.hero-fade-bottom {
+  background: linear-gradient(transparent, #DDE4F0);
+}
+.hero-h1 {
+  text-shadow: 0 18px 70px rgba(0,0,0,0.45);
+}
+.hero-desc,
+.hero-sub-head {
+  color: rgba(255,255,255,0.84);
+}
+.hero-panel {
+  background:
+    linear-gradient(155deg, rgba(255,255,255,0.18), rgba(14,165,163,0.13) 48%, rgba(255,122,89,0.12));
+  border-color: rgba(255,255,255,0.30);
+  box-shadow: 0 34px 110px rgba(0,0,0,0.48);
+}
+.result-pill {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.20);
+}
+
+.trust-bar-inner,
+.af-card,
+.rc,
+.testi,
+.why-card,
+.batch-card,
+.fee-card,
+.contact-info,
+.contact-form-wrap,
+.faq-item {
+  border-color: rgba(11,16,32,0.13);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.74),
+    0 24px 62px rgba(11,16,32,0.14);
+}
+
+.about,
+.fees,
+.faq {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(255,122,89,0.26), transparent 29%),
+    radial-gradient(circle at 88% 16%, rgba(14,165,163,0.24), transparent 28%),
+    radial-gradient(circle at 48% 98%, rgba(79,124,255,0.18), transparent 32%),
+    linear-gradient(135deg, #E9EEF8 0%, #DDEFEF 48%, #F3DDD2 100%);
+}
+.why {
+  background:
+    radial-gradient(circle at 14% 12%, rgba(79,124,255,0.24), transparent 29%),
+    radial-gradient(circle at 88% 18%, rgba(255,122,89,0.23), transparent 28%),
+    radial-gradient(circle at 52% 95%, rgba(14,165,163,0.18), transparent 34%),
+    linear-gradient(135deg, #E6ECFA 0%, #DCEFED 50%, #F1DCD3 100%);
+}
+.results,
+.batches,
+.contact {
+  background:
+    radial-gradient(circle at 8% 12%, rgba(14,165,163,0.27), transparent 30%),
+    radial-gradient(circle at 92% 18%, rgba(79,124,255,0.24), transparent 30%),
+    radial-gradient(circle at 50% 104%, rgba(255,122,89,0.22), transparent 36%),
+    linear-gradient(135deg, #DCEFED 0%, #E5EBFA 48%, #F1DCD3 100%);
+}
+
+.section-title {
+  color: #08111F;
+  text-shadow: 0 12px 42px rgba(11,16,32,0.08);
+}
+.section-title em {
+  color: #E65335;
+}
+.section-sub,
+.about-p,
+.testi-body,
+.why-card p,
+.rc-quote,
+.faq-item p {
+  color: #334155;
+}
+
+.section-tag {
+  color: #087B76;
+}
+.section-tag::before,
+.section-tag::after {
+  opacity: 0.9;
+}
+
+.rc::before,
+.testi::before,
+.why-card::before,
+.batch-card::after,
+.fee-card::before,
+.faq-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    linear-gradient(135deg, rgba(255,122,89,0.16), transparent 34%),
+    linear-gradient(315deg, rgba(14,165,163,0.14), transparent 30%);
+  opacity: 0;
+  transition: opacity 0.25s var(--ease);
+}
+.rc,
+.testi,
+.why-card,
+.batch-card,
+.fee-card,
+.faq-item {
+  position: relative;
+  overflow: hidden;
+}
+.rc:hover::before,
+.testi:hover::before,
+.why-card:hover::before,
+.batch-card:hover::after,
+.fee-card:hover::before,
+.faq-item[open]::before {
+  opacity: 1;
+}
+
+.courses {
+  background:
+    radial-gradient(circle at 14% 16%, rgba(255,122,89,0.30), transparent 30%),
+    radial-gradient(circle at 82% 12%, rgba(14,165,163,0.28), transparent 28%),
+    linear-gradient(135deg, #070B16 0%, #101827 52%, #1A2338 100%);
+}
+.course-card {
+  background:
+    linear-gradient(155deg, rgba(255,255,255,0.16), rgba(14,165,163,0.13) 48%, rgba(255,122,89,0.12));
+  border-color: rgba(255,255,255,0.18);
+}
+.course-card:hover {
+  box-shadow: 0 32px 90px rgba(0,0,0,0.28);
+}
+
+.cta-band,
+footer {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255,122,89,0.30), transparent 30%),
+    radial-gradient(circle at 84% 14%, rgba(14,165,163,0.28), transparent 28%),
+    linear-gradient(135deg, #070B16 0%, #101827 56%, #1A2338 100%);
+}
+
+.btn-demo,
+.btn-ink-gold,
+.form-submit,
+.fee-btn.solid {
+  box-shadow:
+    0 16px 38px rgba(255,122,89,0.36),
+    0 0 0 1px rgba(255,255,255,0.22) inset;
+}
+.btn-demo:hover,
+.btn-ink-gold:hover,
+.form-submit:hover,
+.fee-btn.solid:hover {
+  box-shadow:
+    0 20px 52px rgba(255,122,89,0.46),
+    0 0 0 1px rgba(255,255,255,0.30) inset;
+}
+
+.fee-card.popular {
+  box-shadow:
+    0 34px 100px rgba(11,16,32,0.36),
+    0 0 0 1px rgba(255,255,255,0.08) inset;
+}
+.fee-card.popular .fee-price {
+  color: #FFB199;
+}
+
+.fg input,
+.fg select,
+.demo-assurance span,
+.fee-note {
+  background: linear-gradient(145deg, rgba(246,248,255,0.92), rgba(212,239,235,0.66));
+  border-color: rgba(11,16,32,0.14);
+}
+
+@media (max-width: 600px) {
+  .hero::before {
+    background:
+      linear-gradient(180deg, rgba(5,8,18,0.94), rgba(5,8,18,0.84)),
+      url("https://images.unsplash.com/photo-1509062522246-3755977927d7?w=900&h=1300&fit=crop&auto=format&q=72") center/cover;
+  }
+}
+
+/* ===================== TRUE DARK THEME OVERRIDE ===================== */
+:root {
+  --ink: #050816;
+  --ink-2: #0B1020;
+  --ink-3: #111A2F;
+  --cream: #080D1B;
+  --cream-2: #0F172A;
+  --text-ink: #F8FAFC;
+  --text-body: #C6D0E3;
+  --text-muted: #8EA0BA;
+  --border: rgba(255,255,255,0.12);
+  --border-gold: rgba(255,122,89,0.46);
+  --shadow-sm: 0 14px 40px rgba(0,0,0,0.26);
+  --shadow-md: 0 24px 70px rgba(0,0,0,0.34);
+  --shadow-lg: 0 34px 94px rgba(0,0,0,0.42);
+  --shadow-xl: 0 46px 120px rgba(0,0,0,0.50);
+  --surface-card:
+    linear-gradient(145deg, rgba(17,26,47,0.92), rgba(21,38,54,0.86) 48%, rgba(45,28,36,0.84));
+  --surface-card-alt:
+    linear-gradient(145deg, rgba(14,23,42,0.94), rgba(27,39,70,0.82) 45%, rgba(36,33,55,0.84));
+  --surface-mint:
+    linear-gradient(145deg, rgba(13,35,43,0.94), rgba(18,48,58,0.86) 48%, rgba(35,36,44,0.84));
+}
+
+body {
+  background:
+    radial-gradient(circle at 8% 8%, rgba(255,122,89,0.20), transparent 28%),
+    radial-gradient(circle at 92% 8%, rgba(14,165,163,0.18), transparent 28%),
+    radial-gradient(circle at 50% 40%, rgba(79,124,255,0.12), transparent 38%),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
+    #050816;
+  background-size: auto, auto, auto, 48px 48px, 48px 48px, auto;
+  color: var(--text-ink);
+}
+
+.hero-fade-bottom {
+  background: linear-gradient(transparent, #050816);
+}
+
+.about,
+.results,
+.why,
+.batches,
+.fees,
+.faq,
+.contact {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(255,122,89,0.18), transparent 30%),
+    radial-gradient(circle at 88% 12%, rgba(14,165,163,0.16), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(79,124,255,0.12), transparent 34%),
+    linear-gradient(135deg, #050816 0%, #0B1020 48%, #111A2F 100%);
+}
+
+.section-title,
+.rc-name,
+.batch-title,
+.fee-classes,
+.contact-info h3,
+.contact-form-wrap h3,
+.faq-item summary,
+.testi-name,
+.trust-text strong,
+.about-p,
+.why-card h3 {
+  color: #F8FAFC;
+}
+
+.section-sub,
+.about-p,
+.testi-body,
+.why-card p,
+.rc-quote,
+.faq-item p,
+.contact-info > p,
+.contact-form-wrap > p,
+.fee-list li,
+.batch-lbl,
+.trust-text span,
+.rc-meta,
+.testi-role,
+.fee-period,
+.fg label {
+  color: #AEBBD0;
+}
+
+.section-title em {
+  color: #FFB199;
+}
+.section-tag {
+  color: #7EE7D8;
+}
+
+.nav-inner,
+nav.scrolled .nav-inner {
+  background:
+    linear-gradient(145deg, rgba(13,20,38,0.86), rgba(28,27,45,0.82) 48%, rgba(14,45,50,0.80));
+  border-color: rgba(255,255,255,0.14);
+  box-shadow: 0 18px 70px rgba(0,0,0,0.42);
+}
+@supports (backdrop-filter: blur(18px)) {
+  .nav-inner,
+  nav.scrolled .nav-inner {
+    background:
+      linear-gradient(145deg, rgba(13,20,38,0.72), rgba(28,27,45,0.68) 48%, rgba(14,45,50,0.66));
+  }
+}
+.nav-logo,
+.nav-links a {
+  color: #EAF1FF;
+}
+.nav-links a:hover {
+  color: white;
+  background: rgba(126,231,216,0.12);
+}
+.nav-book {
+  background: linear-gradient(135deg, var(--brand-coral), var(--brand-sun)) !important;
+  color: #07111F !important;
+}
+
+.trust-bar-inner,
+.af-card,
+.rc,
+.testi,
+.why-card,
+.batch-card,
+.fee-card,
+.contact-info,
+.contact-form-wrap,
+.faq-item {
+  background: var(--surface-card);
+  border-color: rgba(255,255,255,0.13);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 24px 70px rgba(0,0,0,0.34);
+}
+
+.rc:nth-child(even),
+.testi:nth-child(even),
+.why-card:nth-child(even),
+.batch-card:nth-child(even),
+.fee-card:nth-child(odd),
+.faq-item:nth-child(even) {
+  background: var(--surface-card-alt);
+}
+.contact-form-wrap,
+.fee-card.popular + .fee-card,
+.faq-item[open] {
+  background: var(--surface-mint);
+}
+
+.about-img {
+  box-shadow: 0 34px 100px rgba(0,0,0,0.48);
+}
+.af-icon,
+.trust-icon,
+.why-icon,
+.batch-icon,
+.ci-ic {
+  background: rgba(126,231,216,0.12);
+  color: #DDFDF9;
+  border: 1px solid rgba(126,231,216,0.14);
+}
+.ti-gold,
+.wi-gold {
+  background: rgba(255,122,89,0.16);
+}
+.ti-blue,
+.wi-blue {
+  background: rgba(79,124,255,0.16);
+}
+.ti-green,
+.wi-green {
+  background: rgba(14,165,163,0.16);
+}
+.ti-purp,
+.wi-purp {
+  background: rgba(168,139,250,0.16);
+}
+
+.rc-bar {
+  background: rgba(255,255,255,0.10);
+}
+.rc-from,
+.rc-sep {
+  color: #7F8CA3;
+}
+.rc-to,
+.batch-val.hi,
+.ci-val a,
+.fee-btn.outline {
+  color: #7EE7D8;
+}
+.rc-gain,
+.bb-open {
+  background: rgba(14,165,163,0.16);
+  color: #94F2E8;
+}
+.bb-filling {
+  background: rgba(255,200,87,0.16);
+  color: #FFE1A0;
+}
+
+.fee-card.popular {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255,122,89,0.22), transparent 34%),
+    radial-gradient(circle at 86% 18%, rgba(14,165,163,0.20), transparent 30%),
+    linear-gradient(145deg, #070B16 0%, #101827 58%, #17233A 100%);
+}
+.fee-rule,
+.fee-card.popular .fee-rule,
+.testi-foot,
+.batch-info,
+.ci-item {
+  border-color: rgba(255,255,255,0.12);
+}
+.fee-btn.outline {
+  background: rgba(126,231,216,0.09);
+  border-color: rgba(126,231,216,0.22);
+}
+
+.fg input,
+.fg select,
+.demo-assurance span,
+.fee-note {
+  background: linear-gradient(145deg, rgba(13,20,38,0.92), rgba(19,45,52,0.76));
+  border-color: rgba(255,255,255,0.14);
+  color: #F8FAFC;
+}
+.fg input::placeholder {
+  color: #7F8CA3;
+}
+.fg input:focus,
+.fg select:focus {
+  background: linear-gradient(145deg, rgba(16,27,49,0.96), rgba(20,55,62,0.82));
+}
+.fg select option {
+  background: #0B1020;
+  color: #F8FAFC;
+}
+.form-status {
+  background: rgba(14,165,163,0.14);
+  color: #A6F4EC;
+}
+
+.ci-item:hover {
+  background: linear-gradient(90deg, rgba(14,165,163,0.12), rgba(255,122,89,0.08));
+}
+.wa-link {
+  box-shadow: 0 16px 42px rgba(18,184,134,0.20);
+}
+
+.faq-item summary::after {
+  background: rgba(126,231,216,0.12);
+  color: #7EE7D8;
+}
+
+.back-to-top {
+  background: linear-gradient(145deg, rgba(13,20,38,0.96), rgba(19,45,52,0.84));
+  color: #F8FAFC;
+  border-color: rgba(255,255,255,0.14);
+}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <!-- Scroll Progress -->
 <div class="scroll-bar" id="scrollBar" aria-hidden="true"></div>
@@ -1610,13 +3038,14 @@ footer::before {
       <span class="nav-logo-mark" aria-hidden="true">B</span>
       BrightPath
     </a>
-    <ul class="nav-links" id="navLinks" role="menubar">
-      <li role="none"><a href="#about" role="menuitem">About</a></li>
-      <li role="none"><a href="#results" role="menuitem">Results</a></li>
-      <li role="none"><a href="#courses" role="menuitem">Courses</a></li>
-      <li role="none"><a href="#batches" role="menuitem">Batches</a></li>
-      <li role="none"><a href="#fees" role="menuitem">Fees</a></li>
-      <li role="none"><a href="#contact" class="nav-book" role="menuitem">Book Demo →</a></li>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#batches">Batches</a></li>
+      <li><a href="#fees">Fees</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact" class="nav-book">Book Demo &rarr;</a></li>
     </ul>
     <button class="nav-ham" id="navHam" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span><span></span>
@@ -1626,12 +3055,13 @@ footer::before {
 
 <!-- Sticky CTA -->
 <div class="sticky-demo" id="stickyCta" aria-hidden="true">
-  <a href="#contact">🎓 Book Free Demo</a>
+  <a href="#contact">Book Free Demo</a>
 </div>
 
 <!-- Back to Top -->
-<button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+<button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">&uarr;</button>
 
+<main id="main">
 <!-- ======================== HERO ======================== -->
 <section class="hero" id="home">
   <!-- Aurora layers -->
@@ -1649,7 +3079,7 @@ footer::before {
     <!-- LEFT: Headline + CTA -->
     <div class="hero-content">
       <div class="hero-eyebrow">
-        <span class="hero-eyebrow-dot" aria-hidden="true">✓</span>
+        <span class="hero-eyebrow-dot" aria-hidden="true">&#10003;</span>
         Mumbai · Est. 2017 · 40+ Students Trust Us
       </div>
 
@@ -1667,7 +3097,7 @@ footer::before {
       <div class="hero-cta-group">
         <a href="#contact" class="btn-demo">
           Book Free Demo Class
-          <span class="arrow" aria-hidden="true">→</span>
+          <span class="arrow" aria-hidden="true">&rarr;</span>
         </a>
         <a href="#results" class="btn-ghost">See Student Results</a>
       </div>
@@ -1682,7 +3112,7 @@ footer::before {
           <div class="hstat-l">Show Improvement</div>
         </div>
         <div class="hero-stat">
-          <div class="hstat-n" data-count="7" data-suffix=" yrs">0</div>
+          <div class="hstat-n" data-count="9" data-suffix=" yrs">0</div>
           <div class="hstat-l">Teaching Experience</div>
         </div>
       </div>
@@ -1690,7 +3120,7 @@ footer::before {
 
     <!-- RIGHT: Social proof panel -->
     <div class="hero-panel" aria-label="Student results preview">
-      <div class="hero-panel-head">Recent Student Results — 2023-24</div>
+      <div class="hero-panel-head">Recent Student Results — 2025-26</div>
 
       <div class="result-pill">
         <div class="rp-left">
@@ -1699,7 +3129,7 @@ footer::before {
         </div>
         <div class="rp-score">
           <span class="rp-before">54%</span>
-          <span class="rp-arrow" aria-hidden="true">→</span>
+          <span class="rp-arrow" aria-hidden="true">&rarr;</span>
           <span class="rp-after">88%</span>
           <span class="rp-gain">+34</span>
         </div>
@@ -1712,7 +3142,7 @@ footer::before {
         </div>
         <div class="rp-score">
           <span class="rp-before">61%</span>
-          <span class="rp-arrow" aria-hidden="true">→</span>
+          <span class="rp-arrow" aria-hidden="true">&rarr;</span>
           <span class="rp-after">91%</span>
           <span class="rp-gain">+30</span>
         </div>
@@ -1725,7 +3155,7 @@ footer::before {
         </div>
         <div class="rp-score">
           <span class="rp-before">67%</span>
-          <span class="rp-arrow" aria-hidden="true">→</span>
+          <span class="rp-arrow" aria-hidden="true">&rarr;</span>
           <span class="rp-after">93%</span>
           <span class="rp-gain">+26</span>
         </div>
@@ -1752,28 +3182,28 @@ footer::before {
 <div class="trust-bar" aria-label="Quick facts">
   <div class="trust-bar-inner">
     <div class="trust-item rev">
-      <div class="trust-icon ti-gold" aria-hidden="true">📚</div>
+      <div class="trust-icon ti-gold" aria-hidden="true">Bk</div>
       <div class="trust-text">
         <strong>Classes 6–12</strong>
         <span>Foundation to Senior</span>
       </div>
     </div>
     <div class="trust-item rev">
-      <div class="trust-icon ti-blue" aria-hidden="true">👥</div>
+      <div class="trust-icon ti-blue" aria-hidden="true">Sm</div>
       <div class="trust-text">
         <strong>8–12 Students</strong>
         <span>Per batch max</span>
       </div>
     </div>
     <div class="trust-item rev">
-      <div class="trust-icon ti-green" aria-hidden="true">📝</div>
+      <div class="trust-icon ti-green" aria-hidden="true">Ts</div>
       <div class="trust-text">
         <strong>Weekly Tests</strong>
         <span>Chapter-wise assessment</span>
       </div>
     </div>
     <div class="trust-item rev">
-      <div class="trust-icon ti-purp" aria-hidden="true">📊</div>
+      <div class="trust-icon ti-purp" aria-hidden="true">Rp</div>
       <div class="trust-text">
         <strong>Monthly Reports</strong>
         <span>Sent to every parent</span>
@@ -1796,7 +3226,7 @@ footer::before {
         <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=1000&fit=crop&auto=format&q=72"
              alt="Students learning in a bright, focused classroom environment at BrightPath Academy" width="800" height="1000" loading="lazy" decoding="async">
         <div class="about-img-bar">
-          <div class="aib-item"><div class="aib-n">7+</div><div class="aib-l">Years</div></div>
+          <div class="aib-item"><div class="aib-n">9+</div><div class="aib-l">Years</div></div>
           <div class="aib-item"><div class="aib-n">40+</div><div class="aib-l">Students</div></div>
           <div class="aib-item"><div class="aib-n">92%</div><div class="aib-l">Improve</div></div>
           <div class="aib-item"><div class="aib-n">8–12</div><div class="aib-l">Per Batch</div></div>
@@ -1809,22 +3239,22 @@ footer::before {
 
         <div class="about-feats">
           <div class="af-card stg">
-            <div class="af-icon" aria-hidden="true">🎯</div>
+            <div class="af-icon" aria-hidden="true">01</div>
             <h4>Concept-First</h4>
             <p>We explain the "why" before the "how"</p>
           </div>
           <div class="af-card stg">
-            <div class="af-icon" aria-hidden="true">📋</div>
+            <div class="af-icon" aria-hidden="true">02</div>
             <h4>Progress Reports</h4>
             <p>Detailed monthly updates to parents</p>
           </div>
           <div class="af-card stg">
-            <div class="af-icon" aria-hidden="true">💬</div>
+            <div class="af-icon" aria-hidden="true">03</div>
             <h4>Doubt Support</h4>
             <p>WhatsApp answers anytime — always</p>
           </div>
           <div class="af-card stg">
-            <div class="af-icon" aria-hidden="true">📝</div>
+            <div class="af-icon" aria-hidden="true">04</div>
             <h4>Board Papers</h4>
             <p>Previous year practice from November</p>
           </div>
@@ -1852,15 +3282,15 @@ footer::before {
           </div>
           <div class="rc-scores">
             <span class="rc-from">54%</span>
-            <span class="rc-sep" aria-hidden="true">→</span>
+            <span class="rc-sep" aria-hidden="true">&rarr;</span>
             <span class="rc-to">88%</span>
           </div>
         </div>
         <div class="rc-name">Riya Kapoor</div>
-        <div class="rc-meta">Class 10 · CBSE · Mathematics · 2023-24</div>
+        <div class="rc-meta">Class 10 · CBSE · Mathematics · 2025-26</div>
         <div class="rc-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"><div class="rc-fill" style="--w:88%"></div></div>
         <div class="rc-quote">"Riya used to dread Maths. After 4 months at BrightPath, she finished boards with 88. We couldn't believe it."</div>
-        <div class="rc-gain">↑ +34 points</div>
+        <div class="rc-gain">&uarr; +34 points</div>
       </div>
 
       <div class="rc stg">
@@ -1871,15 +3301,15 @@ footer::before {
           </div>
           <div class="rc-scores">
             <span class="rc-from">61%</span>
-            <span class="rc-sep" aria-hidden="true">→</span>
+            <span class="rc-sep" aria-hidden="true">&rarr;</span>
             <span class="rc-to">91%</span>
           </div>
         </div>
         <div class="rc-name">Arjun Mehta</div>
-        <div class="rc-meta">Class 9 · ICSE · Science · 2023-24</div>
+        <div class="rc-meta">Class 9 · ICSE · Science · 2025-26</div>
         <div class="rc-bar" role="progressbar" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100"><div class="rc-fill" style="--w:91%"></div></div>
         <div class="rc-quote">"Science had always been his weak spot. The way concepts were explained here made it finally click."</div>
-        <div class="rc-gain">↑ +30 points</div>
+        <div class="rc-gain">&uarr; +30 points</div>
       </div>
 
       <div class="rc stg">
@@ -1890,15 +3320,15 @@ footer::before {
           </div>
           <div class="rc-scores">
             <span class="rc-from">58%</span>
-            <span class="rc-sep" aria-hidden="true">→</span>
+            <span class="rc-sep" aria-hidden="true">&rarr;</span>
             <span class="rc-to">84%</span>
           </div>
         </div>
         <div class="rc-name">Sneha Deshpande</div>
-        <div class="rc-meta">Class 12 · State Board · Maths + Science · 2023-24</div>
+        <div class="rc-meta">Class 12 · State Board · Maths + Science · 2025-26</div>
         <div class="rc-bar" role="progressbar" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"><div class="rc-fill" style="--w:84%"></div></div>
         <div class="rc-quote">"She joined just 4 months before boards. The revision plan and weekly tests made all the difference."</div>
-        <div class="rc-gain">↑ +26 points</div>
+        <div class="rc-gain">&uarr; +26 points</div>
       </div>
 
       <div class="rc stg">
@@ -1909,15 +3339,15 @@ footer::before {
           </div>
           <div class="rc-scores">
             <span class="rc-from">67%</span>
-            <span class="rc-sep" aria-hidden="true">→</span>
+            <span class="rc-sep" aria-hidden="true">&rarr;</span>
             <span class="rc-to">93%</span>
           </div>
         </div>
         <div class="rc-name">Vikram Naik</div>
-        <div class="rc-meta">Class 8 · CBSE · Science · 2023-24</div>
+        <div class="rc-meta">Class 8 · CBSE · Science · 2025-26</div>
         <div class="rc-bar" role="progressbar" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"><div class="rc-fill" style="--w:93%"></div></div>
         <div class="rc-quote">"He went from avoiding Science to looking forward to class. The small batch meant he could actually ask questions."</div>
-        <div class="rc-gain">↑ +26 points</div>
+        <div class="rc-gain">&uarr; +26 points</div>
       </div>
     </div>
 
@@ -1936,7 +3366,7 @@ footer::before {
     <!-- Testimonials -->
     <div class="testi-grid">
       <div class="testi stg">
-        <div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <div class="testi-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="testi-body">"My son was struggling with both subjects. After joining BrightPath, his confidence increased dramatically. The teacher explains patiently and never makes students feel bad for asking basic questions."</p>
         <div class="testi-foot">
           <div class="testi-av" style="background:#1B3F8A" aria-hidden="true">PM</div>
@@ -1947,7 +3377,7 @@ footer::before {
         </div>
       </div>
       <div class="testi stg">
-        <div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <div class="testi-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="testi-body">"What I like most is the monthly progress report. I can actually see where my daughter stands, what topics she's weak in, and what's improving. It gives me peace of mind."</p>
         <div class="testi-foot">
           <div class="testi-av" style="background:#1C6B48" aria-hidden="true">RJ</div>
@@ -1958,13 +3388,13 @@ footer::before {
         </div>
       </div>
       <div class="testi stg">
-        <div class="testi-stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <div class="testi-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="testi-body">"I joined in Class 11 completely lost in Maths. By the end of the year, Maths became my highest scoring subject. The step-by-step method here is completely different from school."</p>
         <div class="testi-foot">
           <div class="testi-av" style="background:#5B21B6" aria-hidden="true">AS</div>
           <div>
             <div class="testi-name">Aarav Shah</div>
-            <div class="testi-role">Student · Class 12 (2023-24)</div>
+            <div class="testi-role">Student · Class 12 (2025-26)</div>
           </div>
         </div>
       </div>
@@ -2002,7 +3432,7 @@ footer::before {
         </div>
         <div class="course-price">
           <div class="course-price-lbl">From</div>
-          <div class="course-price-amt">₹1,500/mo</div>
+          <div class="course-price-amt">&#8377;1,500/mo</div>
         </div>
       </div>
 
@@ -2025,7 +3455,7 @@ footer::before {
         </div>
         <div class="course-price">
           <div class="course-price-lbl">From</div>
-          <div class="course-price-amt">₹2,000/mo</div>
+          <div class="course-price-amt">&#8377;2,000/mo</div>
         </div>
       </div>
 
@@ -2047,7 +3477,7 @@ footer::before {
         </div>
         <div class="course-price">
           <div class="course-price-lbl">From</div>
-          <div class="course-price-amt">₹2,500/mo</div>
+          <div class="course-price-amt">&#8377;2,500/mo</div>
         </div>
       </div>
     </div>
@@ -2066,37 +3496,37 @@ footer::before {
     <div class="why-grid">
       <div class="why-card stg">
         <div class="why-n" aria-hidden="true">01</div>
-        <div class="why-icon wi-gold" aria-hidden="true">👥</div>
+        <div class="why-icon wi-gold" aria-hidden="true">01</div>
         <h3>Small Batches — 8 to 12 Students</h3>
         <p>Every student is visible. Every question gets answered. No one falls through the cracks.</p>
       </div>
       <div class="why-card stg">
         <div class="why-n" aria-hidden="true">02</div>
-        <div class="why-icon wi-blue" aria-hidden="true">🎯</div>
+        <div class="why-icon wi-blue" aria-hidden="true">02</div>
         <h3>Tracked Individually</h3>
         <p>We know each student's strengths, weak chapters, and pace. Teaching adapts to the student — not the other way.</p>
       </div>
       <div class="why-card stg">
         <div class="why-n" aria-hidden="true">03</div>
-        <div class="why-icon wi-green" aria-hidden="true">📝</div>
+        <div class="why-icon wi-green" aria-hidden="true">03</div>
         <h3>Weekly Chapter Tests</h3>
         <p>Regular assessments build exam readiness year-round. Students are always prepared, never cramming.</p>
       </div>
       <div class="why-card stg">
         <div class="why-n" aria-hidden="true">04</div>
-        <div class="why-icon wi-purp" aria-hidden="true">💬</div>
+        <div class="why-icon wi-purp" aria-hidden="true">04</div>
         <h3>Doubt Solving — Anytime</h3>
         <p>WhatsApp questions answered before the next class. Doubts don't wait for scheduled sessions.</p>
       </div>
       <div class="why-card stg">
         <div class="why-n" aria-hidden="true">05</div>
-        <div class="why-icon wi-red" aria-hidden="true">📊</div>
+        <div class="why-icon wi-red" aria-hidden="true">05</div>
         <h3>Monthly Parent Reports</h3>
         <p>Topic coverage, test scores, improvement trends — parents are never in the dark.</p>
       </div>
       <div class="why-card stg">
         <div class="why-n" aria-hidden="true">06</div>
-        <div class="why-icon wi-cream" aria-hidden="true">💡</div>
+        <div class="why-icon wi-cream" aria-hidden="true">06</div>
         <h3>Concept-First Teaching</h3>
         <p>Students who understand always outperform those who memorise. We teach understanding, not shortcuts.</p>
       </div>
@@ -2115,7 +3545,7 @@ footer::before {
 
     <div class="batch-grid">
       <div class="batch-card stg">
-        <div class="batch-icon" aria-hidden="true">📚</div>
+        <div class="batch-icon" aria-hidden="true">F</div>
         <div class="batch-title">Foundation</div>
         <div class="batch-classes">Classes 6, 7 & 8</div>
         <div class="batch-info">
@@ -2123,11 +3553,11 @@ footer::before {
           <div class="batch-row"><span class="batch-lbl">Time</span><span class="batch-val hi">4:00 – 5:30 PM</span></div>
           <div class="batch-row"><span class="batch-lbl">Max Size</span><span class="batch-val">10 students</span></div>
         </div>
-        <span class="batch-badge bb-open">✓ Seats Available</span>
+        <span class="batch-badge bb-open">&#10003; Seats Available</span>
       </div>
 
       <div class="batch-card stg">
-        <div class="batch-icon" aria-hidden="true">🎯</div>
+        <div class="batch-icon" aria-hidden="true">B</div>
         <div class="batch-title">Board Prep</div>
         <div class="batch-classes">Classes 9 & 10</div>
         <div class="batch-info">
@@ -2135,11 +3565,11 @@ footer::before {
           <div class="batch-row"><span class="batch-lbl">Time</span><span class="batch-val hi">5:30 – 7:00 PM</span></div>
           <div class="batch-row"><span class="batch-lbl">Max Size</span><span class="batch-val">12 students</span></div>
         </div>
-        <span class="batch-badge bb-filling">⚡ Limited Seats Left</span>
+        <span class="batch-badge bb-filling">Limited Seats Left</span>
       </div>
 
       <div class="batch-card stg">
-        <div class="batch-icon" aria-hidden="true">🎓</div>
+        <div class="batch-icon" aria-hidden="true">S</div>
         <div class="batch-title">Senior</div>
         <div class="batch-classes">Classes 11 & 12</div>
         <div class="batch-info">
@@ -2147,11 +3577,11 @@ footer::before {
           <div class="batch-row"><span class="batch-lbl">Time</span><span class="batch-val hi">7:00 – 8:30 PM</span></div>
           <div class="batch-row"><span class="batch-lbl">Max Size</span><span class="batch-val">10 students</span></div>
         </div>
-        <span class="batch-badge bb-open">✓ Seats Available</span>
+        <span class="batch-badge bb-open">&#10003; Seats Available</span>
       </div>
 
       <div class="batch-card stg">
-        <div class="batch-icon" aria-hidden="true">🌅</div>
+        <div class="batch-icon" aria-hidden="true">W</div>
         <div class="batch-title">Weekend</div>
         <div class="batch-classes">All Classes</div>
         <div class="batch-info">
@@ -2159,7 +3589,7 @@ footer::before {
           <div class="batch-row"><span class="batch-lbl">Time</span><span class="batch-val hi">9:00 AM – 12:00 PM</span></div>
           <div class="batch-row"><span class="batch-lbl">Max Size</span><span class="batch-val">8 students</span></div>
         </div>
-        <span class="batch-badge bb-open">✓ Seats Available</span>
+        <span class="batch-badge bb-open">&#10003; Seats Available</span>
       </div>
     </div>
   </div>
@@ -2180,14 +3610,14 @@ footer::before {
         <div class="fee-classes">Classes 6, 7 & 8</div>
         <div class="fee-rule"></div>
         <div class="fee-price-lbl">Per subject / month</div>
-        <div class="fee-price">₹1,500</div>
+        <div class="fee-price">&#8377;1,500</div>
         <div class="fee-period">3 days/week · 90 min sessions</div>
         <ul class="fee-list">
-          <li><span class="fee-check" aria-hidden="true">✓</span>12 sessions per month</li>
-          <li><span class="fee-check" aria-hidden="true">✓</span>Weekly chapter tests</li>
-          <li><span class="fee-check" aria-hidden="true">✓</span>Doubt clearing sessions</li>
-          <li><span class="fee-check" aria-hidden="true">✓</span>Monthly progress report</li>
-          <li><span class="fee-check" aria-hidden="true">✓</span>WhatsApp doubt support</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>12 sessions per month</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>Weekly chapter tests</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>Doubt clearing sessions</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>Monthly progress report</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>WhatsApp doubt support</li>
         </ul>
         <a href="#contact" class="fee-btn outline">Enquire Now</a>
       </div>
@@ -2198,16 +3628,16 @@ footer::before {
         <div class="fee-classes">Classes 9 & 10</div>
         <div class="fee-rule"></div>
         <div class="fee-price-lbl">Per subject / month</div>
-        <div class="fee-price">₹2,000</div>
+        <div class="fee-price">&#8377;2,000</div>
         <div class="fee-period">3 days/week · 90 min sessions</div>
         <ul class="fee-list">
-          <li><span class="fee-check" aria-hidden="true">✓</span>12 sessions per month</li>
-          <li><span class="fee-check" aria-hidden="true">✓</span>Board pattern weekly tests</li>
-          <li><span class="fee-check" aria-hidden="true">✓</span>Previous year paper practice</li>
-          <li><span class="fee-check" aria-hidden="true">✓</span>Dedicated doubt sessions</li>
-          <li><span class="fee-check" aria-hidden="true">✓</span>Monthly progress report</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>12 sessions per month</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>Board pattern weekly tests</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>Previous year paper practice</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>Dedicated doubt sessions</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>Monthly progress report</li>
         </ul>
-        <a href="#contact" class="fee-btn solid">Book Free Demo →</a>
+        <a href="#contact" class="fee-btn solid">Book Free Demo &rarr;</a>
       </div>
 
       <div class="fee-card stg">
@@ -2215,20 +3645,54 @@ footer::before {
         <div class="fee-classes">Classes 11 & 12</div>
         <div class="fee-rule"></div>
         <div class="fee-price-lbl">Per subject / month</div>
-        <div class="fee-price">₹2,500</div>
+        <div class="fee-price">&#8377;2,500</div>
         <div class="fee-period">3 days/week · 90 min sessions</div>
         <ul class="fee-list">
-          <li><span class="fee-check" aria-hidden="true">✓</span>12 sessions per month</li>
-          <li><span class="fee-check" aria-hidden="true">✓</span>HSC board focused tests</li>
-          <li><span class="fee-check" aria-hidden="true">✓</span>Competitive exam concepts</li>
-          <li><span class="fee-check" aria-hidden="true">✓</span>Flexible doubt scheduling</li>
-          <li><span class="fee-check" aria-hidden="true">✓</span>Monthly progress report</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>12 sessions per month</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>HSC board focused tests</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>Competitive exam concepts</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>Flexible doubt scheduling</li>
+          <li><span class="fee-check" aria-hidden="true">&#10003;</span>Monthly progress report</li>
         </ul>
         <a href="#contact" class="fee-btn outline">Enquire Now</a>
       </div>
     </div>
 
     <p class="fee-note"><strong>Sibling discounts available.</strong> Combined Maths + Science package pricing on request. First demo class is free — zero obligation.</p>
+  </div>
+</section>
+
+<!-- ======================== FAQ ======================== -->
+<section class="section faq" id="faq">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-tag rev">Questions Parents Ask</div>
+      <h2 class="section-title rev">Clear answers before <em>you visit.</em></h2>
+      <p class="section-sub rev">A few practical details so the first conversation can focus on your child's needs.</p>
+    </div>
+
+    <div class="faq-wrap">
+      <details class="faq-item stg">
+        <summary>Is the demo class really free?</summary>
+        <p>Yes. The first demo class is free and there is no obligation to join afterwards. It is meant to help the student experience the teaching style before parents decide.</p>
+      </details>
+      <details class="faq-item stg">
+        <summary>How do you decide the right batch?</summary>
+        <p>We look at the student's class, board, subject needs, current confidence level, and school schedule. If a student needs extra support, we suggest the batch where they will receive the right pace and attention.</p>
+      </details>
+      <details class="faq-item stg">
+        <summary>Do parents receive progress updates?</summary>
+        <p>Yes. Parents receive monthly updates covering test scores, weak chapters, attendance, and improvement trends. We also message sooner if a student needs attention in a particular topic.</p>
+      </details>
+      <details class="faq-item stg">
+        <summary>Can students ask doubts outside class?</summary>
+        <p>Yes. Students can send doubts on WhatsApp, and we answer them before the next class wherever possible. Dedicated doubt sessions are also arranged when a chapter needs deeper revision.</p>
+      </details>
+      <details class="faq-item stg">
+        <summary>Which boards do you cover?</summary>
+        <p>We cover CBSE, ICSE, and Maharashtra State Board for Classes 6-12, with board-pattern tests and previous-year paper practice as exams approach.</p>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -2240,7 +3704,7 @@ footer::before {
       <p class="cta-band-sub-text">No pressure. No commitment. Come once. See how we teach. Then decide.</p>
     </div>
     <div class="cta-band-actions">
-      <a href="#contact" class="btn-ink-gold">Book Free Demo Class →</a>
+      <a href="#contact" class="btn-ink-gold">Book Free Demo Class &rarr;</a>
       <p class="cta-micro">Takes 30 seconds · We confirm within 24 hours</p>
     </div>
   </div>
@@ -2260,28 +3724,28 @@ footer::before {
         <h3>Contact Information</h3>
         <p>Reach out through any channel below. We typically respond within 2–4 hours during class hours.</p>
         <div class="ci-item">
-          <div class="ci-ic" aria-hidden="true">📞</div>
+          <div class="ci-ic" aria-hidden="true">Ph</div>
           <div>
             <div class="ci-lbl">Phone</div>
             <div class="ci-val"><a href="tel:+919876543210">+91 98765 43210</a></div>
           </div>
         </div>
         <div class="ci-item">
-          <div class="ci-ic" aria-hidden="true">📍</div>
+          <div class="ci-ic" aria-hidden="true">Ad</div>
           <div>
             <div class="ci-lbl">Address</div>
             <div class="ci-val">12, Sunshine Complex, Near XYZ School,<br>Andheri West, Mumbai – 400053</div>
           </div>
         </div>
         <div class="ci-item">
-          <div class="ci-ic" aria-hidden="true">🕐</div>
+          <div class="ci-ic" aria-hidden="true">Hr</div>
           <div>
             <div class="ci-lbl">Hours</div>
             <div class="ci-val">Mon–Fri: 3:30 PM – 9:00 PM<br>Sat–Sun: 9:00 AM – 1:00 PM</div>
           </div>
         </div>
         <div class="ci-item">
-          <div class="ci-ic" aria-hidden="true">✉️</div>
+          <div class="ci-ic" aria-hidden="true">Em</div>
           <div>
             <div class="ci-lbl">Email</div>
             <div class="ci-val"><a href="mailto:hello@brightpathacademy.in">hello@brightpathacademy.in</a></div>
@@ -2289,7 +3753,7 @@ footer::before {
         </div>
         <a href="https://wa.me/919876543210?text=Hi%2C%20I%20want%20to%20book%20a%20free%20demo%20class"
            class="wa-link" target="_blank" rel="noopener noreferrer">
-          💬 Chat on WhatsApp — Fastest Response
+          Chat on WhatsApp — Fastest Response
         </a>
       </div>
 
@@ -2299,59 +3763,73 @@ footer::before {
         <form class="form-grid" id="demoForm" novalidate>
           <div class="fg">
             <label for="studentName">Student's Name</label>
-            <input type="text" id="studentName" name="studentName" placeholder="e.g. Riya Sharma" required autocomplete="given-name">
+            <input type="text" id="studentName" name="studentName" placeholder="e.g. Riya Sharma" required autocomplete="given-name" aria-describedby="studentNameError">
+            <span class="field-error" id="studentNameError" aria-live="polite"></span>
           </div>
           <div class="fg">
             <label for="parentName">Parent's Name</label>
-            <input type="text" id="parentName" name="parentName" placeholder="e.g. Sunita Sharma" required autocomplete="name">
+            <input type="text" id="parentName" name="parentName" placeholder="e.g. Sunita Sharma" required autocomplete="name" aria-describedby="parentNameError">
+            <span class="field-error" id="parentNameError" aria-live="polite"></span>
           </div>
           <div class="fg">
             <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="+91 98XXX XXXXX" required autocomplete="tel">
+            <input type="tel" id="phone" name="phone" placeholder="+91 98XXX XXXXX" required autocomplete="tel" inputmode="tel" pattern="^[0-9+()\s-]{8,18}$" aria-describedby="phoneError">
+            <span class="field-error" id="phoneError" aria-live="polite"></span>
           </div>
           <div class="fg">
             <label for="classSelect">Class</label>
-            <select id="classSelect" name="class" required>
+            <select id="classSelect" name="class" required aria-describedby="classSelectError">
               <option value="">Select class</option>
               <option>Class 6</option><option>Class 7</option><option>Class 8</option>
               <option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option>
             </select>
+            <span class="field-error" id="classSelectError" aria-live="polite"></span>
           </div>
           <div class="fg">
             <label for="subjectSelect">Subject</label>
-            <select id="subjectSelect" name="subject" required>
+            <select id="subjectSelect" name="subject" required aria-describedby="subjectSelectError">
               <option value="">Select subject</option>
               <option>Mathematics</option>
               <option>Science</option>
               <option>Both Maths & Science</option>
             </select>
+            <span class="field-error" id="subjectSelectError" aria-live="polite"></span>
           </div>
           <div class="fg">
             <label for="boardSelect">Board</label>
-            <select id="boardSelect" name="board" required>
+            <select id="boardSelect" name="board" required aria-describedby="boardSelectError">
               <option value="">Select board</option>
               <option>CBSE</option><option>ICSE</option><option>State Board</option>
             </select>
+            <span class="field-error" id="boardSelectError" aria-live="polite"></span>
           </div>
           <div class="fg span2">
             <label for="batchSelect">Preferred Batch</label>
-            <select id="batchSelect" name="batch" required>
+            <select id="batchSelect" name="batch" required aria-describedby="batchSelectError">
               <option value="">Select preferred timing</option>
               <option>Foundation – Mon/Wed/Fri, 4:00–5:30 PM</option>
               <option>Board Prep – Tue/Thu/Sat, 5:30–7:00 PM</option>
               <option>Senior – Mon/Wed/Fri, 7:00–8:30 PM</option>
               <option>Weekend – Sat/Sun, 9:00 AM–12:00 PM</option>
             </select>
+            <span class="field-error" id="batchSelectError" aria-live="polite"></span>
           </div>
           <div class="fg span2">
-            <button type="submit" class="form-submit" id="formSubmitBtn">Book My Free Demo Class →</button>
+            <button type="submit" class="form-submit" id="formSubmitBtn">Book My Free Demo Class &rarr;</button>
           </div>
         </form>
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+        <div class="demo-assurance" aria-label="Demo class assurances">
+          <span>Free trial</span>
+          <span>No pressure</span>
+          <span>24 hr callback</span>
+        </div>
         <p class="form-note">No spam. No follow-up calls unless you want them.</p>
       </div>
     </div>
   </div>
 </section>
+</main>
 
 <!-- ======================== FOOTER ======================== -->
 <footer>
@@ -2372,6 +3850,7 @@ footer::before {
           <li><a href="#courses">Courses</a></li>
           <li><a href="#batches">Batches</a></li>
           <li><a href="#fees">Fees</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
@@ -2395,11 +3874,33 @@ footer::before {
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2024 BrightPath Academy · All rights reserved.</p>
+      <p>© 2026 BrightPath Academy · All rights reserved.</p>
       <p>Andheri West, Mumbai — CBSE · ICSE · State Board</p>
     </div>
   </div>
 </footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "BrightPath Academy",
+  "description": "Small-batch Maths and Science coaching for Classes 6-12 in Andheri West, Mumbai.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "12, Sunshine Complex, Near XYZ School",
+    "addressLocality": "Andheri West",
+    "addressRegion": "Mumbai",
+    "postalCode": "400053",
+    "addressCountry": "IN"
+  },
+  "telephone": "+91 98765 43210",
+  "email": "hello@brightpathacademy.in",
+  "areaServed": "Mumbai",
+  "foundingDate": "2017",
+  "priceRange": "INR 1500-2500 per subject per month"
+}
+</script>
 
 <script>
 (function () {
@@ -2475,7 +3976,7 @@ footer::before {
 
   document.querySelectorAll('.rev, .rev-l, .rev-r').forEach(el => io.observe(el));
 
-  // Stagger: observe parent → add children to main IO
+  // Stagger: observe parent, then add children to main IO
   const stgIO = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -2586,39 +4087,104 @@ footer::before {
   // — Form submit —
   const form = document.getElementById('demoForm');
   const submitBtn = document.getElementById('formSubmitBtn');
+  const formStatus = document.getElementById('formStatus');
   if (form && submitBtn) {
+    const messages = {
+      studentName: 'Please enter the student name.',
+      parentName: 'Please enter the parent name.',
+      phone: 'Please enter a valid phone number.',
+      classSelect: 'Please select the class.',
+      subjectSelect: 'Please select a subject.',
+      boardSelect: 'Please select the board.',
+      batchSelect: 'Please select a preferred batch.'
+    };
+
+    function setFieldState(field, message) {
+      const error = document.getElementById(field.id + 'Error');
+      field.classList.toggle('is-invalid', Boolean(message));
+      field.setAttribute('aria-invalid', message ? 'true' : 'false');
+      if (error) error.textContent = message || '';
+    }
+
+    function validateField(field) {
+      const value = field.value.trim();
+      let message = '';
+      if (field.required && !value) {
+        message = messages[field.id] || 'This field is required.';
+      } else if (field.id === 'phone' && value && !/^[0-9+()\s-]{8,18}$/.test(value)) {
+        message = messages.phone;
+      }
+      setFieldState(field, message);
+      return !message;
+    }
+
+    form.querySelectorAll('input, select').forEach(field => {
+      const resetReadyState = () => {
+        delete submitBtn.dataset.whatsappUrl;
+        submitBtn.onclick = null;
+        submitBtn.textContent = 'Book My Free Demo Class ->';
+        submitBtn.style.background = '';
+        submitBtn.style.color = '';
+      };
+      field.addEventListener('input', () => {
+        resetReadyState();
+        validateField(field);
+      });
+      field.addEventListener('change', () => {
+        resetReadyState();
+        validateField(field);
+      });
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (submitBtn.dataset.whatsappUrl) {
+        window.open(submitBtn.dataset.whatsappUrl, '_blank', 'noopener,noreferrer');
+        return;
+      }
       if (submitBtn.disabled) return;
 
-      // Basic validation
-      const inputs = form.querySelectorAll('[required]');
-      let valid = true;
-      inputs.forEach(inp => {
-        if (!inp.value.trim()) {
-          valid = false;
-          inp.style.borderColor = '#EF4444';
-          inp.addEventListener('input', function handler() {
-            inp.style.borderColor = '';
-            inp.removeEventListener('input', handler);
-          }, { once: true });
-          inp.addEventListener('change', function handler() {
-            inp.style.borderColor = '';
-            inp.removeEventListener('change', handler);
-          }, { once: true });
+      const fields = Array.from(form.querySelectorAll('input, select'));
+      const valid = fields.every(validateField);
+      const firstInvalid = fields.find(field => field.classList.contains('is-invalid'));
+      if (!valid) {
+        if (firstInvalid) firstInvalid.focus();
+        if (formStatus) {
+          formStatus.textContent = 'Please complete the highlighted details.';
+          formStatus.classList.add('show');
         }
-      });
-
-      if (!valid) return;
+        return;
+      }
 
       submitBtn.textContent = 'Sending...';
       submitBtn.disabled = true;
+      if (formStatus) {
+        formStatus.textContent = 'Preparing your demo request...';
+        formStatus.classList.add('show');
+      }
 
-      // Simulate submission
+      const data = new FormData(form);
+      const summary = [
+        'Hi, I want to book a free demo class.',
+        `Student: ${data.get('studentName')}`,
+        `Parent: ${data.get('parentName')}`,
+        `Phone: ${data.get('phone')}`,
+        `Class: ${data.get('class')}`,
+        `Subject: ${data.get('subject')}`,
+        `Board: ${data.get('board')}`,
+        `Preferred batch: ${data.get('batch')}`
+      ].join('\n');
+      const whatsappUrl = 'https://wa.me/919876543210?text=' + encodeURIComponent(summary);
+
       setTimeout(() => {
-        submitBtn.textContent = '✓ Request Sent — We\'ll confirm within 24 hrs';
+        submitBtn.textContent = 'Request Ready - Open WhatsApp';
         submitBtn.style.background = '#059669';
         submitBtn.style.color = 'white';
+        submitBtn.disabled = false;
+        submitBtn.dataset.whatsappUrl = whatsappUrl;
+        if (formStatus) {
+          formStatus.textContent = 'Your details are ready. Tap the button to send them on WhatsApp for the fastest confirmation.';
+        }
       }, 800);
     });
   }
